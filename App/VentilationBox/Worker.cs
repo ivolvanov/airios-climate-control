@@ -26,18 +26,7 @@ namespace httpdemo
             // first line always contains the request.
             string response;
             Console.WriteLine(line);
-            /* string lline = streamReader.ReadLine();
-            Console.WriteLine(lline);
-            lline = streamReader.ReadLine();
-            Console.WriteLine(lline);
-            lline = streamReader.ReadLine();
-            Console.WriteLine(lline);
-            lline = streamReader.ReadLine();
-            Console.WriteLine(lline);
-            lline = streamReader.ReadLine();     
-            Console.WriteLine(lline);
-            lline = streamReader.ReadLine();
-            Console.WriteLine(lline);            //empty line        */
+
 
             string[] parts = line.Split(' ');
             if (parts[0].ToUpper() == "GET")
@@ -46,6 +35,23 @@ namespace httpdemo
             }
             else if (parts[0].ToUpper() == "POST")
             {
+                string lline = streamReader.ReadLine();
+               // Console.WriteLine(lline);
+                lline = streamReader.ReadLine();
+               // Console.WriteLine(lline);
+                lline = streamReader.ReadLine();
+                //Console.WriteLine(lline);
+                lline = streamReader.ReadLine();
+                Console.WriteLine(lline);           //content-length: x, must parse the number and put it instead of "17" in .Read and buffer
+                lline = streamReader.ReadLine();
+                //Console.WriteLine(lline);
+                lline = streamReader.ReadLine();
+               // Console.WriteLine(lline);            //empty line     
+
+                char[] buffer = new char[20];
+                streamReader.Read(buffer, 0, 17);
+                Console.WriteLine(buffer);
+
                 response = "POST handled";
             }
             else
@@ -55,8 +61,7 @@ namespace httpdemo
             }
 
             string uri = parts[2];
-            Console.WriteLine(uri);
-            // ignore http version
+            //Console.WriteLine(uri);
             streamWriter.Write("HTTP/1.1 200 OK\r\n");
             streamWriter.Write("Server: C# server\r\n");
             streamWriter.Write("Content-Type: text/plain\r\n");
@@ -65,10 +70,11 @@ namespace httpdemo
             streamWriter.Write("\r\n");
             streamWriter.Write(response);
 
-            skipResponse:  //flag for goto on line 44
+            skipResponse:  //flag for goto on line 60
             streamWriter.Flush();
             // Client disconnected
             Console.WriteLine("Disconnect");
+            Console.WriteLine();
             socket.Close();
         }
     }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "49zjQtAwI05/8Vb5fLfL/0jZ0atinjECNf1Y4AURvwKOkGuVygXV/2VKisLRpEq4SBfJRjFun5N2pB4Xl18vUg==",
+  "dgSpecHash": "xaOVcSVQJHlZIRm3XnW8kbDQaio92WgJCi90k6h8xyNbqASzymmDtkme9piGCP6mzr7SqyYl2kdB1mmYdPV0ug==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pisal\\Desktop\\httpdemo\\VentilationBoxServer\\VentilationBox.csproj",
+  "projectFilePath": "C:\\Users\\pisal\\Desktop\\GITHUB\\airiosproject\\App\\VentilationBox\\VentilationBox.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -3,6 +3,14 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
+/*
+ * Usage:
+ * IP = 192.168.0.105 in my case, localhost IP
+ * curl -d "some Random data" IP:42069 = POST request, response expected = "POST Handled" & POST data printed in server console (max 17 chars)
+ * curl IP:42069 = GET request, response expected = "GET Handled"
+ */
+
+
 namespace httpdemo
 {
     class Program

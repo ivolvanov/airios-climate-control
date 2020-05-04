@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pisal\\Desktop\\httpdemo\\VentilationBoxServer\\VentilationBox.csproj",
+      "projectUniqueName": "C:\\Users\\pisal\\Desktop\\GITHUB\\airiosproject\\App\\VentilationBox\\VentilationBox.csproj",
       "projectName": "VentilationBox",
-      "projectPath": "C:\\Users\\pisal\\Desktop\\httpdemo\\VentilationBoxServer\\VentilationBox.csproj",
+      "projectPath": "C:\\Users\\pisal\\Desktop\\GITHUB\\airiosproject\\App\\VentilationBox\\VentilationBox.csproj",
       "packagesPath": "C:\\Users\\pisal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pisal\\Desktop\\httpdemo\\VentilationBoxServer\\obj\\",
+      "outputPath": "C:\\Users\\pisal\\Desktop\\GITHUB\\airiosproject\\App\\VentilationBox\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

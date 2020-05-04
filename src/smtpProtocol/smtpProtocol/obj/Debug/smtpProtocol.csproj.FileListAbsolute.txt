@@ -1,0 +1,10 @@
+C:\Users\stefa\source\repos\smtpProtocol\smtpProtocol\bin\Debug\smtpProtocol.exe.config
+C:\Users\stefa\source\repos\smtpProtocol\smtpProtocol\bin\Debug\smtpProtocol.exe
+C:\Users\stefa\source\repos\smtpProtocol\smtpProtocol\bin\Debug\smtpProtocol.pdb
+C:\Users\stefa\source\repos\smtpProtocol\smtpProtocol\obj\Debug\smtpProtocol.csprojAssemblyReference.cache
+C:\Users\stefa\source\repos\smtpProtocol\smtpProtocol\obj\Debug\smtpProtocol.Properties.Resources.resources
+C:\Users\stefa\source\repos\smtpProtocol\smtpProtocol\obj\Debug\smtpProtocol.csproj.GenerateResource.cache
+C:\Users\stefa\source\repos\smtpProtocol\smtpProtocol\obj\Debug\smtpProtocol.exe
+C:\Users\stefa\source\repos\smtpProtocol\smtpProtocol\obj\Debug\smtpProtocol.pdb
+C:\Users\stefa\source\repos\smtpProtocol\smtpProtocol\obj\Debug\smtpProtocol.Login.resources
+C:\Users\stefa\source\repos\smtpProtocol\smtpProtocol\obj\Debug\smtpProtocol.Gmail.resources

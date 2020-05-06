@@ -35,23 +35,23 @@ namespace httpdemo
             }
             else if (parts[0].ToUpper() == "POST")
             {
-                string lline = streamReader.ReadLine();
-               // Console.WriteLine(lline);
+                string lline = "";
+                int length = 0;
+                char[] buffer;
+                while (!lline.StartsWith("CONTENT-LENGTH:"))
+                {
+                    lline = streamReader.ReadLine();
+                    lline = lline.ToUpper();
+                    if (lline.StartsWith("CONTENT-LENGTH:"))
+                    {
+                        length = Int16.Parse(lline.Substring(16));
+                    }
+                }
+                buffer = new char[length];
                 lline = streamReader.ReadLine();
-               // Console.WriteLine(lline);
-                lline = streamReader.ReadLine();
-                //Console.WriteLine(lline);
-                lline = streamReader.ReadLine();
-                Console.WriteLine(lline);           //content-length: x, must parse the number and put it instead of "17" in .Read and buffer
-                lline = streamReader.ReadLine();
-                //Console.WriteLine(lline);
-                lline = streamReader.ReadLine();
-               // Console.WriteLine(lline);            //empty line     
-
-                char[] buffer = new char[20];
-                streamReader.Read(buffer, 0, 17);
+                Console.WriteLine(lline);            //empty line 
+                streamReader.Read(buffer, 0, length);
                 Console.WriteLine(buffer);
-
                 response = "POST handled";
             }
             else
@@ -61,7 +61,6 @@ namespace httpdemo
             }
 
             string uri = parts[2];
-            //Console.WriteLine(uri);
             streamWriter.Write("HTTP/1.1 200 OK\r\n");
             streamWriter.Write("Server: C# server\r\n");
             streamWriter.Write("Content-Type: text/plain\r\n");

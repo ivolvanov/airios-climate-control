@@ -8,33 +8,42 @@ int data[6];
 
 void setup()
 {
-  // Initialise I2C communication as MASTER
+ 
+
+
+ // Initialise I2C communication as MASTER
   Wire.begin();
 
   // Initialise serial communication
   Serial.begin(9600);
+  // Start I2C Transmission
+  Wire.beginTransmission(SensorAddr);
+  // Send 16-bit command byte
+  Wire.write(0x23); //0x2C //reset 0x30A2 //0xF32D
+  Wire.write(0x22); //0x06
+  // Stop I2C transmission
+   Wire.endTransmission();
+  //delay(1000);
+
+
+  
 }
 
 void loop()
 {
 
-  // Start I2C Transmission
-  Wire.beginTransmission(SensorAddr);
-  // Send 16-bit command byte
-  Wire.write(0x2C); //0x2C //reset 0x30A2 //0xF32D
-  Wire.write(0x06); //0x06
-  // Stop I2C transmission
-   Wire.endTransmission();
-  delay(1000);
+
+  
 
   // Request 6 bytes of data
    Wire.requestFrom(SensorAddr, 6);
+   delay(50);
   
 
   // Read 6 bytes of data
   // temp msb, temp lsb, temp crc, hum msb, hum lsb, hum crc
 
-  if (Wire.available()  == 6)
+  if (Wire.available())
   {
     data[0] = Wire.read();
     

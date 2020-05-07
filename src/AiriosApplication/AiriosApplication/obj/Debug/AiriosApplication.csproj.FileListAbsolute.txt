@@ -1,0 +1,11 @@
+C:\Users\stefa\source\repos\AiriosApplication\AiriosApplication\bin\Debug\AiriosApplication.exe.config
+C:\Users\stefa\source\repos\AiriosApplication\AiriosApplication\bin\Debug\AiriosApplication.exe
+C:\Users\stefa\source\repos\AiriosApplication\AiriosApplication\bin\Debug\AiriosApplication.pdb
+C:\Users\stefa\source\repos\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.csprojAssemblyReference.cache
+C:\Users\stefa\source\repos\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.Properties.Resources.resources
+C:\Users\stefa\source\repos\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.csproj.GenerateResource.cache
+C:\Users\stefa\source\repos\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.csproj.CoreCompileInputs.cache
+C:\Users\stefa\source\repos\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.exe
+C:\Users\stefa\source\repos\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.pdb
+C:\Users\stefa\source\repos\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.ApplicationForm.resources
+C:\Users\stefa\source\repos\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.StatisticsForm.resources

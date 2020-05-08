@@ -17,7 +17,6 @@ namespace httpdemo
 
         public void run()
         {
-           
             // Setup streams to read & write
             NetworkStream networkStream = new NetworkStream(socket);
             StreamReader streamReader = new StreamReader(networkStream);
@@ -50,7 +49,7 @@ namespace httpdemo
                 buffer = new char[length];
                 lline = streamReader.ReadLine();
                 Console.WriteLine(lline);            //empty line 
-                streamReader.Read(buffer, 0, length);
+                streamReader.ReadBlock(buffer, 0, length);
                 Console.WriteLine(buffer);
                 response = "POST handled";
             }

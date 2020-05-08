@@ -1,0 +1,8 @@
+The embedded board has a couple of sensors connected to it. Each one of them has to communicate with the board through a given
+communication protocol. They are as follows:
+1. The temperature and humidity sensor uses I²C.
+2. The VOC sensor uses I²C.
+3. The CO2 sensor uses UART.
+
+Communication between the Embedded board and the C# application will be based on a custom protocol which will be agreed on with 3 other
+teams in the future. Communication will occur once every 15 minutes or at sudden changes of sensor readings.

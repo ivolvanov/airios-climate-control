@@ -31,3 +31,15 @@ C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\Block 1
 C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\Block 1\Project\Week 11\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.csproj.CoreCompileInputs.cache
 C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\Block 1\Project\Week 11\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.exe
 C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\Block 1\Project\Week 11\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.pdb
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\bin\Debug\AiriosApplication.exe.config
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\bin\Debug\AiriosApplication.exe
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\bin\Debug\AiriosApplication.pdb
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.csprojAssemblyReference.cache
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.ApplicationForm.resources
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.StatisticsForm.resources
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.Properties.Resources.resources
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.csproj.GenerateResource.cache
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.csproj.CoreCompileInputs.cache
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.exe
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.pdb
+C:\Users\stefa\Documents\airiosproject\src\AiriosApplication\AiriosApplication\obj\Debug\AiriosApplication.VentilationForm.resources

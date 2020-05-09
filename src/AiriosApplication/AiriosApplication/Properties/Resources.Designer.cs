@@ -93,6 +93,16 @@ namespace AiriosApplication.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ip_address {
+            get {
+                object obj = ResourceManager.GetObject("ip_address", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap temperature {
             get {
                 object obj = ResourceManager.GetObject("temperature", resourceCulture);

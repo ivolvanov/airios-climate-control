@@ -28,80 +28,80 @@
       /// </summary>
       private void InitializeComponent()
       {
-         System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-         System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-         this.chartStats = new System.Windows.Forms.DataVisualization.Charting.Chart();
-         this.gbGraph = new System.Windows.Forms.GroupBox();
-         this.gbData = new System.Windows.Forms.GroupBox();
-         this.dgvData = new System.Windows.Forms.DataGridView();
-         ((System.ComponentModel.ISupportInitialize)(this.chartStats)).BeginInit();
-         this.gbGraph.SuspendLayout();
-         this.gbData.SuspendLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
-         this.SuspendLayout();
-         // 
-         // chartStats
-         // 
-         chartArea1.Name = "ChartArea1";
-         this.chartStats.ChartAreas.Add(chartArea1);
-         legend1.Name = "Legend1";
-         this.chartStats.Legends.Add(legend1);
-         this.chartStats.Location = new System.Drawing.Point(8, 28);
-         this.chartStats.Name = "chartStats";
-         this.chartStats.Size = new System.Drawing.Size(407, 181);
-         this.chartStats.TabIndex = 0;
-         this.chartStats.Text = "Measured data";
-         // 
-         // gbGraph
-         // 
-         this.gbGraph.Controls.Add(this.chartStats);
-         this.gbGraph.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.gbGraph.Location = new System.Drawing.Point(12, 12);
-         this.gbGraph.Name = "gbGraph";
-         this.gbGraph.Size = new System.Drawing.Size(421, 215);
-         this.gbGraph.TabIndex = 1;
-         this.gbGraph.TabStop = false;
-         this.gbGraph.Text = "Graph";
-         // 
-         // gbData
-         // 
-         this.gbData.Controls.Add(this.dgvData);
-         this.gbData.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.gbData.Location = new System.Drawing.Point(13, 234);
-         this.gbData.Name = "gbData";
-         this.gbData.Size = new System.Drawing.Size(420, 177);
-         this.gbData.TabIndex = 2;
-         this.gbData.TabStop = false;
-         this.gbData.Text = "Data";
-         // 
-         // dgvData
-         // 
-         this.dgvData.AllowUserToAddRows = false;
-         this.dgvData.AllowUserToDeleteRows = false;
-         this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-         this.dgvData.Location = new System.Drawing.Point(7, 28);
-         this.dgvData.Name = "dgvData";
-         this.dgvData.ReadOnly = true;
-         this.dgvData.Size = new System.Drawing.Size(407, 143);
-         this.dgvData.TabIndex = 0;
-         // 
-         // StatisticsForm
-         // 
-         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.BackColor = System.Drawing.Color.White;
-         this.ClientSize = new System.Drawing.Size(445, 420);
-         this.Controls.Add(this.gbData);
-         this.Controls.Add(this.gbGraph);
-         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-         this.Name = "StatisticsForm";
-         this.Text = "Statistics";
-         this.Load += new System.EventHandler(this.StatisticsForm_Load);
-         ((System.ComponentModel.ISupportInitialize)(this.chartStats)).EndInit();
-         this.gbGraph.ResumeLayout(false);
-         this.gbData.ResumeLayout(false);
-         ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
-         this.ResumeLayout(false);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            this.chartStats = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.gbGraph = new System.Windows.Forms.GroupBox();
+            this.gbData = new System.Windows.Forms.GroupBox();
+            this.dgvData = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.chartStats)).BeginInit();
+            this.gbGraph.SuspendLayout();
+            this.gbData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // chartStats
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartStats.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartStats.Legends.Add(legend1);
+            this.chartStats.Location = new System.Drawing.Point(8, 28);
+            this.chartStats.Name = "chartStats";
+            this.chartStats.Size = new System.Drawing.Size(407, 181);
+            this.chartStats.TabIndex = 0;
+            this.chartStats.Text = "Measured data";
+            // 
+            // gbGraph
+            // 
+            this.gbGraph.Controls.Add(this.chartStats);
+            this.gbGraph.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbGraph.Location = new System.Drawing.Point(12, 12);
+            this.gbGraph.Name = "gbGraph";
+            this.gbGraph.Size = new System.Drawing.Size(421, 215);
+            this.gbGraph.TabIndex = 1;
+            this.gbGraph.TabStop = false;
+            this.gbGraph.Text = "Graph";
+            // 
+            // gbData
+            // 
+            this.gbData.Controls.Add(this.dgvData);
+            this.gbData.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbData.Location = new System.Drawing.Point(13, 234);
+            this.gbData.Name = "gbData";
+            this.gbData.Size = new System.Drawing.Size(420, 177);
+            this.gbData.TabIndex = 2;
+            this.gbData.TabStop = false;
+            this.gbData.Text = "Data";
+            // 
+            // dgvData
+            // 
+            this.dgvData.AllowUserToAddRows = false;
+            this.dgvData.AllowUserToDeleteRows = false;
+            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvData.Location = new System.Drawing.Point(7, 28);
+            this.dgvData.Name = "dgvData";
+            this.dgvData.ReadOnly = true;
+            this.dgvData.Size = new System.Drawing.Size(407, 143);
+            this.dgvData.TabIndex = 0;
+            // 
+            // StatisticsForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(445, 420);
+            this.Controls.Add(this.gbData);
+            this.Controls.Add(this.gbGraph);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Name = "StatisticsForm";
+            this.Text = "Statistics";
+            this.Load += new System.EventHandler(this.StatisticsForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.chartStats)).EndInit();
+            this.gbGraph.ResumeLayout(false);
+            this.gbData.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            this.ResumeLayout(false);
 
       }
 

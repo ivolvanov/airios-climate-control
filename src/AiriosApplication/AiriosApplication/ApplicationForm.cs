@@ -49,13 +49,13 @@ namespace AiriosApplication
          lbTime.Text = DateTime.Now.ToShortTimeString(); // Set time
 
          // TODO: once first module connected, display its values. If disconnected, display initial values (all 0's)
-         //if (Readings.Co2.Count != 0 && Readings.Humidity.Count != 0 && Readings.Voc.Count != 0 && Readings.Temperature.Count != 0)
-         //{
-         //   lbCO2.Text = Readings.Co2[Readings.Co2.Count - 1].ToString() + " ppm";
-         //   lbTemp.Text = Readings.Temperature[Readings.Temperature.Count - 1].ToString() + "℃";
-         //   lbHumid.Text = Readings.Humidity[Readings.Humidity.Count - 1].ToString() + "%";
-         //   lbTVOC.Text = Readings.Voc[Readings.Voc.Count - 1].ToString() + " ppb";
-         //}
+         if (Readings.Co2.Count != 0 && Readings.Humidity.Count != 0 && Readings.Voc.Count != 0 && Readings.Temperature.Count != 0)
+         {
+            lbCO2.Text = Readings.Co2[Readings.Co2.Count - 1].ToString() + " ppm";
+            lbTemp.Text = Readings.Temperature[Readings.Temperature.Count - 1].ToString() + "℃";
+            lbHumid.Text = Readings.Humidity[Readings.Humidity.Count - 1].ToString() + "%";
+            lbTVOC.Text = Readings.Voc[Readings.Voc.Count - 1].ToString() + " ppb";
+         }
       }
 
       private void MainForm_Load(object sender, EventArgs e)

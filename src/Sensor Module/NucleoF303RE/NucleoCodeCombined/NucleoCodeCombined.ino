@@ -5,6 +5,7 @@ SoftSerial serialESP(RXesp, TXesp, ssesp);
 unsigned long long checkSerialESP = 0, checkSensors = 0;
 int co2 = 0, voc = 0;
 float temperatureValue = 0, humidityValue = 0;
+bool once = true;
 
 void setup()
 {
@@ -16,9 +17,9 @@ void setup()
   checkSerialESP = millis();
   checkSensors = millis();
   delay(5000);
-  co2 = GetCO2();
-  GetTempHum(&temperatureValue, &humidityValue);
-  voc = GetVOC();
+  //co2 = GetCO2();
+  //GetTempHum(&temperatureValue, &humidityValue);
+ // voc = GetVOC();
 }
 
 
@@ -32,10 +33,23 @@ void loop()
     co2 = GetCO2();
     GetTempHum(&temperatureValue, &humidityValue);
     voc = GetVOC();
-    /*Serial.println(co2);
-    Serial.println(voc);
-    Serial.println(temperatureValue);
-    Serial.println(humidityValue);*/
+    delay(100);
+    if(once)
+    {
+      String protocol = "#";
+    protocol += temperatureValue;
+    protocol += ";";
+    protocol += co2;
+    protocol += ";";
+    protocol += humidityValue;
+    protocol += ";";
+    protocol += voc;
+    protocol += ";i";
+    protocol += "$";
+    serialESP.print(protocol);
+    Serial.println(protocol);
+      once = false;
+    }
     checkSensors = millis();
   }
   //---------------------------------------------------------------------
@@ -60,7 +74,7 @@ void loop()
     protocol += voc;
     protocol += ";i";
     protocol += "$";
-    //Serial.println(protocol); //      #26.00;1291;42.75;125;i$
+    Serial.println(protocol); //      #26.00;1291;42.75;125;i$
     serialESP.print(protocol);
     checkSerialESP = millis();   
   }

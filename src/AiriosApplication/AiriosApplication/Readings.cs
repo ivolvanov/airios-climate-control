@@ -25,6 +25,8 @@ namespace AiriosApplication
             try
             {
                 splitBuffer[0] = splitBuffer[0].Replace("#%", "");
+                splitBuffer[0] = splitBuffer[0].Replace(".", ","); //doubles need to be with a comma instead of a .
+                splitBuffer[2] = splitBuffer[2].Replace(".", ",");
                 splitBuffer[3] = splitBuffer[3].Replace("$", "");
                 Data.Rows.Add(DateTime.Now, Convert.ToDouble(splitBuffer[0]), Convert.ToDouble(splitBuffer[2]),
                     Convert.ToInt32(splitBuffer[1]), Convert.ToInt32(splitBuffer[3]));

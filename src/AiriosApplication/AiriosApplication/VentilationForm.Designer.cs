@@ -28,7 +28,6 @@
       /// </summary>
       private void InitializeComponent()
       {
-         this.components = new System.ComponentModel.Container();
          this.picFan = new System.Windows.Forms.PictureBox();
          this.btnIncrease = new System.Windows.Forms.Button();
          this.btnDecrease = new System.Windows.Forms.Button();
@@ -36,7 +35,6 @@
          this.lbFanSpeed = new System.Windows.Forms.Label();
          this.btnConnect = new System.Windows.Forms.Button();
          this.cmbConnected = new System.Windows.Forms.ComboBox();
-         this.serialPort = new System.IO.Ports.SerialPort(this.components);
          ((System.ComponentModel.ISupportInitialize)(this.picFan)).BeginInit();
          this.gbFanSpeed.SuspendLayout();
          this.SuspendLayout();
@@ -109,7 +107,6 @@
          // 
          // cmbConnected
          // 
-         this.cmbConnected.Enabled = false;
          this.cmbConnected.Font = new System.Drawing.Font("Segoe UI", 10F);
          this.cmbConnected.FormattingEnabled = true;
          this.cmbConnected.Location = new System.Drawing.Point(109, 107);
@@ -117,6 +114,7 @@
          this.cmbConnected.Size = new System.Drawing.Size(76, 25);
          this.cmbConnected.TabIndex = 5;
          this.cmbConnected.DropDown += new System.EventHandler(this.cmbConnected_DropDown);
+         this.cmbConnected.TextChanged += new System.EventHandler(this.cmbConnected_TextChanged);
          // 
          // VentilationForm
          // 
@@ -134,9 +132,9 @@
          this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
          this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
          this.Name = "VentilationForm";
+         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
          this.Text = "Ventilation Box";
          this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VentilationForm_FormClosing);
-         this.Load += new System.EventHandler(this.VentilationForm_Load);
          ((System.ComponentModel.ISupportInitialize)(this.picFan)).EndInit();
          this.gbFanSpeed.ResumeLayout(false);
          this.gbFanSpeed.PerformLayout();
@@ -153,6 +151,5 @@
         private System.Windows.Forms.Label lbFanSpeed;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.ComboBox cmbConnected;
-      private System.IO.Ports.SerialPort serialPort;
    }
 }

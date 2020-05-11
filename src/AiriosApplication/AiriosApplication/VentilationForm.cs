@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
+using System.IO;
 
 namespace AiriosApplication
 {
@@ -18,6 +19,7 @@ namespace AiriosApplication
       private bool connected = false;
       private SerialPort port;
       private Thread thread;
+      private string received = "0";
 
       public VentilationForm()
       {
@@ -35,35 +37,47 @@ namespace AiriosApplication
 
       private void lbFanSpeed_MouseClick(object sender, MouseEventArgs e)
       {
-         // TODO: change later
-         if (unit) { gbFanSpeed.Text = "%"; }
-         else { gbFanSpeed.Text = "PWM"; }
-         unit = !unit;
-      }
-
-      private void VentilationForm_Load(object sender, EventArgs e)
-      {
-         string[] ports = SerialPort.GetPortNames();
-         foreach (string serialPort in ports)
+         if (unit)
          {
-            cmbConnected.Items.Add(serialPort);
-            if (ports[0] != null)
-            {
-               cmbConnected.Enabled = true;
-               cmbConnected.SelectedItem = ports[0];
-               btnConnect.Enabled = true;
-            }
+            gbFanSpeed.Text = "%";
+            lbFanSpeed.Text = ((Convert.ToInt32(received) * 100) / 180).ToString();
          }
+         else
+         {
+            gbFanSpeed.Text = "PWM";
+            lbFanSpeed.Text = received;
+         }
+         unit = !unit;
       }
 
       private void btnIncrease_Click(object sender, EventArgs e)
       {
-         if (connected) { port.Write("#INCR\n"); }
+         if (connected)
+         {
+            try
+            {
+               port.Write("#INCR\n");
+            }
+            catch
+            {
+               SerialDisconnect();
+            }
+         }
       }
 
       private void btnDecrease_Click(object sender, EventArgs e)
       {
-         if (connected) { port.Write("#DECR\n"); }
+         if (connected)
+         {
+            try
+            {
+               port.Write("#DECR\n");
+            }
+            catch
+            {
+               SerialDisconnect();
+            }
+         }
       }
 
       private void btnConnect_Click(object sender, EventArgs e)
@@ -76,28 +90,44 @@ namespace AiriosApplication
       {
          if (connected)
          {
-            connected = false;
-            cmbConnected.Enabled = true;
-            string ports = SerialPort.GetPortNames()[0];
-            port.Write("#STOP\n");
-            port.Close();
-            thread.Abort();
-            btnConnect.Text = "Connect";
-            lbFanSpeed.Text = "0";
+            try
+            {
+               connected = false;
+               cmbConnected.Enabled = true;
+               cmbConnected.Text = string.Empty;
+               port.Write("#STOP\n");
+               port.Close();
+               thread.Abort();
+               btnConnect.Text = "Connect";
+               lbFanSpeed.Text = "0";
+            }
+            catch
+            {
+               MessageBox.Show("Device disconnected abruptly. Aborting application.", "Device Disconnected Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               Application.Exit();
+            }
          }
       }
 
       private void SerialConnect()
       {
-         connected = true;
-         cmbConnected.Enabled = false;
-         string selectedPort = cmbConnected.GetItemText(cmbConnected.SelectedItem);
-         port = new SerialPort(selectedPort, 9600, Parity.None, 8, StopBits.One);
-         port.Open();
-         port.Write("#STAR\n");
-         thread = new Thread(SerialReceive);
-         thread.Start();
-         btnConnect.Text = "Disconnect";
+         string[] serialPorts = SerialPort.GetPortNames();
+         if (serialPorts.Contains(cmbConnected.Text))
+         {
+            port = new SerialPort(cmbConnected.Text, 9600, Parity.None, 8, StopBits.One);
+            connected = true;
+            cmbConnected.Enabled = false;
+            port.Open();
+            port.Write("#STAR\n");
+            thread = new Thread(SerialReceive);
+            thread.Start();
+            btnConnect.Text = "Disconnect";
+         }
+         else
+         {
+            cmbConnected.Text = string.Empty;
+            btnConnect.Enabled = false;
+         }
       }
 
       private void VentilationForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -111,8 +141,17 @@ namespace AiriosApplication
          {
             try
             {
-               string received = port.ReadLine();
-               lbFanSpeed.Invoke(new MethodInvoker(delegate { lbFanSpeed.Text = received; }));
+               received = port.ReadLine();
+               lbFanSpeed.Invoke(new MethodInvoker(delegate {
+                  if (unit)
+                  {
+                     lbFanSpeed.Text = received;
+                  }
+                  else
+                  {
+                     lbFanSpeed.Text = ((Convert.ToInt32(received) * 100) / 180).ToString();
+                  }
+               }));
             }
             catch { }
          }
@@ -125,6 +164,19 @@ namespace AiriosApplication
          foreach (string port in ports)
          {
             cmbConnected.Items.Add(port);
+         }
+      }
+
+      private void cmbConnected_TextChanged(object sender, EventArgs e)
+      {
+         string[] serialPorts = SerialPort.GetPortNames();
+         if (serialPorts.Contains(cmbConnected.Text))
+         {
+            btnConnect.Enabled = true;
+         }
+         else
+         {
+            btnConnect.Enabled = false;
          }
       }
    }

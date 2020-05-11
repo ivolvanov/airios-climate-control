@@ -17,9 +17,12 @@ void setup()
   checkSerialESP = millis();
   checkSensors = millis();
   delay(5000);
-  //co2 = GetCO2();
-  //GetTempHum(&temperatureValue, &humidityValue);
- // voc = GetVOC();
+  co2 = GetCO2();
+  GetTempHum(&temperatureValue, &humidityValue);
+  voc = GetVOC();
+  delay(100);
+  serialESP.print("BEGIN");
+  delay(200);
 }
 
 

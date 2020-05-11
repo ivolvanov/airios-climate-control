@@ -32,13 +32,30 @@ void setup() {
 }
 
 void loop() {
-  //String localIP = WiFi.localIP().toString();
-  //String dataToBeSent = "#%temp_value;co2_value;hum_value;voc_value;" + localIP + "$";
-  //Serial.println(POSTrequest(dataToBeSent));
-  //Serial.println(GETrequest());
-  //delay(5000);
-  while(ss.available())
-  Serial.print((char)ss.read());
+  if (ss.available())
+  {
+    int counter = 0;
+    String buffer = "";
+    while (ss.available())
+    {
+      buffer += (char)ss.read();
+      counter++;
+      delay(2);
+    }
+    if(buffer.startsWith("#") && buffer.endsWith("$"))
+    for(int i = 0; i < buffer.length(); i++)
+    {
+      if(buffer[i] == 'i')
+      {
+        buffer = buffer.substring(0, i);
+        buffer += WiFi.localIP().toString();
+        buffer += "$";
+        Serial.println(buffer);
+        POSTrequest(buffer);
+      }
+    }
+    //Serial.println(buffer);
+  }
 }
 
 

@@ -75,8 +75,13 @@ namespace AiriosApplication
 
       private void btnMore_Click(object sender, EventArgs e)
       {
-         StatisticsForm statisticsForm = new StatisticsForm(); // Create new form
-         statisticsForm.Show();
+            if(Readings.Data.Rows.Count != 0)
+            {
+                StatisticsForm statisticsForm = new StatisticsForm(); // Create new form
+                statisticsForm.Show();
+            }
+            else            
+                MessageBox.Show("There are no readings taken yet!");            
       }
 
       private void ApplicationForm_FormClosing(object sender, FormClosingEventArgs e)

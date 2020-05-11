@@ -3,9 +3,10 @@
 SoftSerial serialco2(RXco2, TXco2, ssco2);
 SoftSerial serialESP(RXesp, TXesp, ssesp);
 unsigned long long checkSerialESP = 0, checkSensors = 0;
-int co2 = 0, voc = 0;
+int co2 = 0, voc = 0, oldco2 = 0, oldvoc = 0;
 float temperatureValue = 0, humidityValue = 0;
 bool once = true;
+bool co2Spike = false, vocSpike = false;
 
 void setup()
 {
@@ -29,6 +30,33 @@ void setup()
 
 void loop()
 {
+  if (co2Spike || vocSpike)
+  {
+    String protocol = "#";
+    protocol += temperatureValue;
+    protocol += ";";
+    if (co2Spike)
+    {
+      protocol += "%";
+      co2Spike = false;
+    }
+    protocol += co2;
+    protocol += ";";
+    protocol += humidityValue;
+    protocol += ";";
+    if (vocSpike)
+    {
+      protocol += "%";
+      vocSpike = false;
+    }
+    protocol += voc;
+    protocol += ";i";
+    protocol += "$";
+    Serial.println(protocol);
+    serialESP.print(protocol);
+    vocSpike = false;
+    co2Spike = false;
+  }
   //---------------------------------------------------------------------
   if (millis() - checkSensors > cycleCheckSensors)  //Read sensors measurements every 2 seconds.
   {
@@ -36,21 +64,30 @@ void loop()
     co2 = GetCO2();
     GetTempHum(&temperatureValue, &humidityValue);
     voc = GetVOC();
+    if (!once)
+    {
+      if (oldco2 - 80 >= co2 || oldco2 + 80 <= co2)
+        co2Spike = true;
+      if (oldvoc - 30 >= co2 || oldvoc + 30 <= voc)  
+        vocSpike = true;
+      oldco2 = co2;
+      oldvoc = voc;
+    }
     delay(100);
-    if(once)
+    if (once)
     {
       String protocol = "#";
-    protocol += temperatureValue;
-    protocol += ";";
-    protocol += co2;
-    protocol += ";";
-    protocol += humidityValue;
-    protocol += ";";
-    protocol += voc;
-    protocol += ";i";
-    protocol += "$";
-    serialESP.print(protocol);
-    Serial.println(protocol);
+      protocol += temperatureValue;
+      protocol += ";";
+      protocol += co2;
+      protocol += ";";
+      protocol += humidityValue;
+      protocol += ";";
+      protocol += voc;
+      protocol += ";i";
+      protocol += "$";
+      serialESP.print(protocol);
+      Serial.println(protocol);
       once = false;
     }
     checkSensors = millis();
@@ -59,14 +96,14 @@ void loop()
   if (millis() - checkSerialESP > cycleSendInfo) //send info to ESP every 5 mins
   {
     /*
-     * Protocol:
-     * start character - #
-     * separating character - ;
-     * commands - % for spiked value
-     * template - 1st: temp 2nd: co2 3rd: humidity 4th IP of ESP, will be added later
-     * end character - $
-     * example - #temp_value;%co2_value;hum_value;%voc_value;Ip_value$
-     */
+       Protocol:
+       start character - #
+       separating character - ;
+       commands - % for spiked value
+       template - 1st: temp 2nd: co2 3rd: humidity 4th IP of ESP, will be added later
+       end character - $
+       example - #temp_value;%co2_value;hum_value;%voc_value;Ip_value$
+    */
     String protocol = "#";
     protocol += temperatureValue;
     protocol += ";";
@@ -79,7 +116,7 @@ void loop()
     protocol += "$";
     Serial.println(protocol); //      #26.00;1291;42.75;125;i$
     serialESP.print(protocol);
-    checkSerialESP = millis();   
+    checkSerialESP = millis();
   }
   //---------------------------------------------------------------------
 }

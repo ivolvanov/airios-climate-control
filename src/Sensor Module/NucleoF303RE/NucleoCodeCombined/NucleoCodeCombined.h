@@ -16,7 +16,7 @@
 #define ssco2 3
 #define ssesp 4
 #define cycleSendInfo 300000
-#define cycleCheckSensors 2000
+#define cycleCheckSensors 10000
 
 
 uint16_t GetVOC(); //returns voc value

@@ -14,7 +14,7 @@ namespace AiriosApplication
     {
         private static DataTable data = new DataTable();
 
-        public static DataTable Data { get { return data; } }
+        public static DataTable Data { get { return data; }  set { data = value; } }
         /// <summary>
         /// Puts the values from a protocol-compliant message in a char[] buffer in the DataTable of the current static class
         /// </summary>

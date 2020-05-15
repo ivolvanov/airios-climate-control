@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using System.Runtime.Serialization;
 
 namespace AiriosApplication
 {
@@ -66,13 +69,38 @@ namespace AiriosApplication
             serverThread = new Thread(server.Run);
             serverThread.Start();
 
-            //Experimenting with using a DataTable instead of Lists, easier to link with chart
+            Readings.Data.TableName = "Readings";
             Readings.Data.Columns.Add("Timestamp", typeof(DateTime));
             Readings.Data.Columns.Add("Temperature", typeof(double));
             Readings.Data.Columns.Add("Humidity", typeof(double));
             Readings.Data.Columns.Add("CO2", typeof(int));
             Readings.Data.Columns.Add("VOC", typeof(int));
             Readings.Data.Columns.Add("IP", typeof(string));
+            
+            // TODO: put in a separate method
+            // takes care of loading the previous readings
+            FileStream fileStream = new FileStream("Readings.xml", FileMode.OpenOrCreate);
+            if(fileStream.Length != 0)
+            {
+                try
+                { 
+                    Readings.Data.ReadXml(fileStream);
+                    fileStream.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    fileStream.Close();
+                }
+            }    
+            else                            
+                fileStream.Close();
+            
+            dataRefreshTimer.Start();
+            autoSaver.Start();
         }
 
         private void btnMore_Click(object sender, EventArgs e)
@@ -84,12 +112,6 @@ namespace AiriosApplication
             }
             else
                 MessageBox.Show("There are no readings taken yet!");
-        }
-
-        private void ApplicationForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Readings.ShouldStop = true;
-            serverThread.Abort();
         }
 
         private void SwitchValues()
@@ -155,6 +177,26 @@ namespace AiriosApplication
         private void btnFan_Click(object sender, EventArgs e)
         {
             new Thread(() => new VentilationForm().ShowDialog()).Start();
+        }
+
+        private void autoSaver_Tick(object sender, EventArgs e)
+        {
+            // TODO: change interval
+            // periodically saves the readings taken
+            FileStream fileStream = new FileStream("Readings.xml", FileMode.Open);
+            try
+            {
+                Readings.Data.WriteXml(fileStream);
+                fileStream.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {                
+                fileStream.Close();
+            }
         }
     }
 }

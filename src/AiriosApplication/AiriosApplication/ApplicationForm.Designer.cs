@@ -45,6 +45,7 @@
             this.picTVOC = new System.Windows.Forms.PictureBox();
             this.picTemp = new System.Windows.Forms.PictureBox();
             this.picHumid = new System.Windows.Forms.PictureBox();
+            this.autoSaver = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picIP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCO2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTVOC)).BeginInit();
@@ -66,7 +67,6 @@
             // 
             // dataRefreshTimer
             // 
-            this.dataRefreshTimer.Enabled = true;
             this.dataRefreshTimer.Interval = 500;
             this.dataRefreshTimer.Tick += new System.EventHandler(this.timer_Tick);
             // 
@@ -240,6 +240,11 @@
             this.picHumid.TabStop = false;
             this.picHumid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picHumid_MouseClick);
             // 
+            // autoSaver
+            // 
+            this.autoSaver.Interval = 1000;
+            this.autoSaver.Tick += new System.EventHandler(this.autoSaver_Tick);
+            // 
             // ApplicationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -297,6 +302,7 @@
       private System.Windows.Forms.PictureBox picIP;
       private System.Windows.Forms.Label lbIP;
       private System.Windows.Forms.Button btnFan;
-   }
+        private System.Windows.Forms.Timer autoSaver;
+    }
 }
 

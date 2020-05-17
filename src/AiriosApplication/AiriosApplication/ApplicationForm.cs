@@ -16,10 +16,13 @@ namespace AiriosApplication
 {
     public partial class ApplicationForm : Form
     {
-        //TODO: Include status message
         //TODO: Implement protocol checking (make sure that the message received is protocol-compliant)
         //TODO: Take values from corrupt messages (so that when only one sensor breaks the others keep giving readings)
+
         Thread serverThread;
+        private List<string> connectedDevices = new List<string>();
+        private string selectedDevice;
+        private bool once = true; // used for initialization of selectedDevice in the timer
 
         public ApplicationForm()
         {
@@ -44,6 +47,7 @@ namespace AiriosApplication
             toolTip.SetToolTip(lbCO2, "Carbon dioxide in parts-per-million");
             toolTip.SetToolTip(picIP, "Current IP being displayed\nClick on any icon or value to switch between modules");
             toolTip.SetToolTip(lbIP, "Current IP being displayed\nClick on any icon or value to switch between modules");
+            toolTip.SetToolTip(panelSwitch, "Click here to show readings of another connected device.");
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -51,15 +55,28 @@ namespace AiriosApplication
             lbDate.Text = DateTime.Now.ToLongDateString(); // Set date
             lbTime.Text = DateTime.Now.ToShortTimeString(); // Set time
 
-            // TODO: once first module connected, display its values. If disconnected, display initial values (all 0's)
-            // NEW: now using a DataTable for readability and easiler linking to chart
+            // TODO: once first module connected, display its values. If disconnected, display initial values (all 0's)            
             if (Readings.Data.Rows.Count != 0)
             {
-                lbCO2.Text = Readings.Data.Rows[Readings.Data.Rows.Count - 1]["CO2"].ToString() + " ppm";
-                lbTemp.Text = Readings.Data.Rows[Readings.Data.Rows.Count - 1]["Temperature"].ToString() + "℃";
-                lbHumid.Text = Readings.Data.Rows[Readings.Data.Rows.Count - 1]["Humidity"].ToString() + "%";
-                lbTVOC.Text = Readings.Data.Rows[Readings.Data.Rows.Count - 1]["VOC"].ToString() + " ppb";
-                lbIP.Text = Readings.Data.Rows[Readings.Data.Rows.Count - 1]["IP"].ToString();
+                if(once)
+                {
+                    selectedDevice = Readings.Data.Rows[Readings.Data.Rows.Count - 1]["IP"].ToString();
+                    once = false;
+                }
+                if (!connectedDevices.Contains(Readings.Data.Rows[Readings.Data.Rows.Count - 1]["IP"].ToString()))
+                    connectedDevices.Add(Readings.Data.Rows[Readings.Data.Rows.Count - 1]["IP"].ToString());
+                for (int i = Readings.Data.Rows.Count - 1; i >= 0; i--)
+                {
+                    if (Readings.Data.Rows[i]["IP"].ToString() == selectedDevice)
+                    {
+                        lbCO2.Text = Readings.Data.Rows[i]["CO2"].ToString() + " ppm";
+                        lbTemp.Text = Readings.Data.Rows[i]["Temperature"].ToString() + "℃";
+                        lbHumid.Text = Readings.Data.Rows[i]["Humidity"].ToString() + "%";
+                        lbTVOC.Text = Readings.Data.Rows[i]["VOC"].ToString() + " ppb";
+                        lbIP.Text = Readings.Data.Rows[i]["IP"].ToString();
+                        break;
+                    }
+                }                       
             }
         }
 
@@ -69,6 +86,7 @@ namespace AiriosApplication
             serverThread = new Thread(server.Run);
             serverThread.Start();
 
+            // initializes the table
             Readings.Data.TableName = "Readings";
             Readings.Data.Columns.Add("Timestamp", typeof(DateTime));
             Readings.Data.Columns.Add("Temperature", typeof(double));
@@ -76,14 +94,14 @@ namespace AiriosApplication
             Readings.Data.Columns.Add("CO2", typeof(int));
             Readings.Data.Columns.Add("VOC", typeof(int));
             Readings.Data.Columns.Add("IP", typeof(string));
-            
+
             // TODO: put in a separate method
             // takes care of loading the previous readings
             FileStream fileStream = new FileStream("Readings.xml", FileMode.OpenOrCreate);
-            if(fileStream.Length != 0)
+            if (fileStream.Length != 0)
             {
                 try
-                { 
+                {
                     Readings.Data.ReadXml(fileStream);
                     fileStream.Close();
                 }
@@ -95,83 +113,24 @@ namespace AiriosApplication
                 {
                     fileStream.Close();
                 }
-            }    
-            else                            
+            }
+            else
                 fileStream.Close();
-            
+
             dataRefreshTimer.Start();
             autoSaver.Start();
         }
 
         private void btnMore_Click(object sender, EventArgs e)
         {
+            // opens a new form if there are any readings taken
             if (Readings.Data.Rows.Count != 0)
-            {                
+            {
                 StatisticsForm statisticsForm = new StatisticsForm(); // Create new form
                 statisticsForm.Show();
             }
             else
                 MessageBox.Show("There are no readings taken yet!");
-        }
-
-        private void SwitchValues()
-        {
-            // TODO: display values of possible other connected modules
-            lbTemp.Text = "clicked";
-            lbHumid.Text = "clicked";
-            lbTVOC.Text = "clicked";
-            lbCO2.Text = "clicked";
-            lbIP.Text = "clicked";
-        }
-
-        private void picTemp_MouseClick(object sender, MouseEventArgs e)
-        {
-            SwitchValues();
-        }
-
-        private void picHumid_MouseClick(object sender, MouseEventArgs e)
-        {
-            SwitchValues();
-        }
-
-        private void picTVOC_MouseClick(object sender, MouseEventArgs e)
-        {
-            SwitchValues();
-        }
-
-        private void picCO2_MouseClick(object sender, MouseEventArgs e)
-        {
-            SwitchValues();
-        }
-
-        private void picIP_MouseClick(object sender, MouseEventArgs e)
-        {
-            SwitchValues();
-        }
-
-        private void lbTemp_MouseClick(object sender, MouseEventArgs e)
-        {
-            SwitchValues();
-        }
-
-        private void lbHumid_MouseClick(object sender, MouseEventArgs e)
-        {
-            SwitchValues();
-        }
-
-        private void lbTVOC_MouseClick(object sender, MouseEventArgs e)
-        {
-            SwitchValues();
-        }
-
-        private void lbCO2_MouseClick(object sender, MouseEventArgs e)
-        {
-            SwitchValues();
-        }
-
-        private void lbIP_MouseClick(object sender, MouseEventArgs e)
-        {
-            SwitchValues();
         }
 
         private void btnFan_Click(object sender, EventArgs e)
@@ -194,9 +153,18 @@ namespace AiriosApplication
                 MessageBox.Show(ex.ToString());
             }
             finally
-            {                
+            {
                 fileStream.Close();
             }
+        }
+
+        private void panelSwitch_MouseClick(object sender, MouseEventArgs e)
+        {
+            // switches the label values if another device is connected
+            if (connectedDevices.IndexOf(selectedDevice) != connectedDevices.Count - 1)
+                selectedDevice = connectedDevices[connectedDevices.IndexOf(selectedDevice) + 1];
+            else
+                selectedDevice = connectedDevices[0];
         }
     }
 }

@@ -46,6 +46,7 @@
             this.picTemp = new System.Windows.Forms.PictureBox();
             this.picHumid = new System.Windows.Forms.PictureBox();
             this.autoSaver = new System.Windows.Forms.Timer(this.components);
+            this.panelSwitch = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.picIP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCO2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTVOC)).BeginInit();
@@ -93,7 +94,6 @@
             this.lbHumid.Size = new System.Drawing.Size(38, 25);
             this.lbHumid.TabIndex = 2;
             this.lbHumid.Text = "0%";
-            this.lbHumid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbHumid_MouseClick);
             // 
             // lbTemp
             // 
@@ -106,7 +106,6 @@
             this.lbTemp.Size = new System.Drawing.Size(41, 25);
             this.lbTemp.TabIndex = 6;
             this.lbTemp.Text = "0°C";
-            this.lbTemp.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbTemp_MouseClick);
             // 
             // lbTVOC
             // 
@@ -119,7 +118,6 @@
             this.lbTVOC.Size = new System.Drawing.Size(60, 25);
             this.lbTVOC.TabIndex = 7;
             this.lbTVOC.Text = "0 ppb";
-            this.lbTVOC.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbTVOC_MouseClick);
             // 
             // lbCO2
             // 
@@ -132,7 +130,6 @@
             this.lbCO2.Size = new System.Drawing.Size(65, 25);
             this.lbCO2.TabIndex = 8;
             this.lbCO2.Text = "0 ppm";
-            this.lbCO2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbCO2_MouseClick);
             // 
             // lbUnderscore
             // 
@@ -166,7 +163,6 @@
             this.lbIP.Size = new System.Drawing.Size(64, 25);
             this.lbIP.TabIndex = 17;
             this.lbIP.Text = "0.0.0.0";
-            this.lbIP.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbIP_MouseClick);
             // 
             // btnFan
             // 
@@ -190,7 +186,6 @@
             this.picIP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picIP.TabIndex = 16;
             this.picIP.TabStop = false;
-            this.picIP.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picIP_MouseClick);
             // 
             // picCO2
             // 
@@ -202,7 +197,6 @@
             this.picCO2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picCO2.TabIndex = 9;
             this.picCO2.TabStop = false;
-            this.picCO2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picCO2_MouseClick);
             // 
             // picTVOC
             // 
@@ -214,7 +208,6 @@
             this.picTVOC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picTVOC.TabIndex = 5;
             this.picTVOC.TabStop = false;
-            this.picTVOC.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picTVOC_MouseClick);
             // 
             // picTemp
             // 
@@ -226,7 +219,6 @@
             this.picTemp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picTemp.TabIndex = 4;
             this.picTemp.TabStop = false;
-            this.picTemp.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picTemp_MouseClick);
             // 
             // picHumid
             // 
@@ -238,12 +230,19 @@
             this.picHumid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picHumid.TabIndex = 3;
             this.picHumid.TabStop = false;
-            this.picHumid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picHumid_MouseClick);
             // 
             // autoSaver
             // 
             this.autoSaver.Interval = 1000;
             this.autoSaver.Tick += new System.EventHandler(this.autoSaver_Tick);
+            // 
+            // panelSwitch
+            // 
+            this.panelSwitch.Location = new System.Drawing.Point(12, 106);
+            this.panelSwitch.Name = "panelSwitch";
+            this.panelSwitch.Size = new System.Drawing.Size(195, 165);
+            this.panelSwitch.TabIndex = 19;
+            this.panelSwitch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelSwitch_MouseClick);
             // 
             // ApplicationForm
             // 
@@ -266,6 +265,7 @@
             this.Controls.Add(this.lbHumid);
             this.Controls.Add(this.lbDate);
             this.Controls.Add(this.lbTime);
+            this.Controls.Add(this.panelSwitch);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -303,6 +303,7 @@
       private System.Windows.Forms.Label lbIP;
       private System.Windows.Forms.Button btnFan;
         private System.Windows.Forms.Timer autoSaver;
+        private System.Windows.Forms.Panel panelSwitch;
     }
 }
 

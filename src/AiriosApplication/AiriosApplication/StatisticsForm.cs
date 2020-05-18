@@ -39,6 +39,8 @@ namespace AiriosApplication
             chartStats.DataSource = Readings.Data;
             chartStats.DataBind();
             grapher = GraphTemperature;
+
+            dgvData.DataSource = Readings.Data;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)

@@ -34,7 +34,7 @@ namespace AiriosApplication
             }
             catch (Exception)
             {
-                MessageBox.Show("Protocol failure!");
+                
             }
         }
 

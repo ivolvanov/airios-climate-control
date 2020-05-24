@@ -29,8 +29,8 @@
       private void InitializeComponent()
       {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.chartStats = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.gbGraph = new System.Windows.Forms.GroupBox();
             this.gbData = new System.Windows.Forms.GroupBox();
@@ -49,10 +49,10 @@
             // 
             // chartStats
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartStats.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartStats.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chartStats.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartStats.Legends.Add(legend2);
             this.chartStats.Location = new System.Drawing.Point(8, 28);
             this.chartStats.Name = "chartStats";
             this.chartStats.Size = new System.Drawing.Size(1358, 382);
@@ -86,10 +86,10 @@
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.Location = new System.Drawing.Point(0, 64);
+            this.dgvData.Location = new System.Drawing.Point(0, 28);
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
-            this.dgvData.Size = new System.Drawing.Size(1364, 133);
+            this.dgvData.Size = new System.Drawing.Size(1364, 169);
             this.dgvData.TabIndex = 0;
             // 
             // label1

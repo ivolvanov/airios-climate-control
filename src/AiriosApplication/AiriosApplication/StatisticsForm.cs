@@ -32,15 +32,18 @@ namespace AiriosApplication
             toolTip.SetToolTip(gbGraph, "Data from sensor visualized");
             toolTip.SetToolTip(chartStats, "Data from sensor visualized");
             toolTip.SetToolTip(gbData, "Collected data from sensors");
-            
-            // TODO: Make a combobox with all the readings, plot the selected reading
-            // TODO: Update the chart once the Form is open (timer)            
+       
 
             chartStats.DataSource = Readings.Data;
             chartStats.DataBind();
             grapher = GraphTemperature;
 
             dgvData.DataSource = Readings.Data;
+            for (short i = 0; i < dgvData.Columns.Count; i++)
+            {
+                dgvData.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvData.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }                
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -65,7 +68,7 @@ namespace AiriosApplication
 
         private void updateTimer_Tick(object sender, EventArgs e)
         {
-            grapher();
+            grapher();            
         }
 
         private void GraphTemperature()
@@ -76,14 +79,18 @@ namespace AiriosApplication
             chartStats.Series[0].YValueMembers = "Temperature";
             chartStats.Series[0].ChartType = SeriesChartType.Line;
 
-            // Takes care of scaling - calculates the MIN and MAX values of the column
-            chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(Temperature)", null)) - 1;
-            chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(Temperature)", null)) + 1;
+            try
+            {
+                // Takes care of scaling - calculates the MIN and MAX values of the column
+                chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(Temperature)", null)) - 1;
+                chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(Temperature)", null)) + 1;
+            }
+            catch (Exception) { }
 
             chartStats.Series[0].LegendText = "Temperature";
             chartStats.Series[0].XValueType = ChartValueType.Time;
             chartStats.Series[0].YValueType = ChartValueType.Int32;
-            chartStats.Series[0].BorderWidth = 6;            
+            chartStats.Series[0].BorderWidth = 6;
         }
 
         private void GraphHumidity()
@@ -93,14 +100,18 @@ namespace AiriosApplication
             chartStats.Series[0].XValueMember = "Timestamp";
             chartStats.Series[0].YValueMembers = "Humidity";
             chartStats.Series[0].ChartType = SeriesChartType.Line;
-            
-            chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(Humidity)", null)) - 5;
-            chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(Humidity)", null)) + 5;
+
+            try
+            {
+                chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(Humidity)", null)) - 5;
+                chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(Humidity)", null)) + 5;
+            }
+            catch (Exception) { }
 
             chartStats.Series[0].LegendText = "Humidity";
             chartStats.Series[0].XValueType = ChartValueType.Time;
             chartStats.Series[0].YValueType = ChartValueType.Int32;
-            chartStats.Series[0].BorderWidth = 6;            
+            chartStats.Series[0].BorderWidth = 6;
         }
 
         private void GraphCO2()
@@ -111,8 +122,12 @@ namespace AiriosApplication
             chartStats.Series[0].YValueMembers = "CO2";
             chartStats.Series[0].ChartType = SeriesChartType.Line;
 
-            chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(CO2)", null)) - 5;
-            chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(CO2)", null)) + 5;
+            try
+            {
+                chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(CO2)", null)) - 5;
+                chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(CO2)", null)) + 5;
+            }
+            catch (Exception) { }
 
             chartStats.Series[0].LegendText = "CO2";
             chartStats.Series[0].XValueType = ChartValueType.Time;
@@ -127,16 +142,19 @@ namespace AiriosApplication
             chartStats.Series[0].XValueMember = "Timestamp";
             chartStats.Series[0].YValueMembers = "VOC";
             chartStats.Series[0].ChartType = SeriesChartType.Line;
-            
-            chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(VOC)", null)) - 5;
-            chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(VOC)", null)) + 5;
+
+            try
+            {
+                chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(VOC)", null)) - 5;
+                chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(VOC)", null)) + 5;
+            }
+            catch (Exception) { }
 
             chartStats.Series[0].LegendText = "VOC";
             chartStats.Series[0].XValueType = ChartValueType.Time;
             chartStats.Series[0].YValueType = ChartValueType.Int32;
             chartStats.Series[0].BorderWidth = 6;
         }
-        
     }
 }
 

@@ -156,7 +156,7 @@ namespace AiriosApplication
             statisticsForm.Show();
          }
          else
-            MessageBox.Show("There are no readings taken yet!");
+            MessageBox.Show("There are no readings taken yet!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
 
       private void btnFan_Click(object sender, EventArgs e)

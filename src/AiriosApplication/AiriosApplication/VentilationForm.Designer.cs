@@ -132,7 +132,7 @@
          this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
          this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
          this.Name = "VentilationForm";
-         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
          this.Text = "Ventilation Box";
          this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VentilationForm_FormClosing);
          ((System.ComponentModel.ISupportInitialize)(this.picFan)).EndInit();

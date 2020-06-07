@@ -33,9 +33,9 @@ namespace AiriosApplication
                     Convert.ToInt32(splitBuffer[1]), Convert.ToInt32(splitBuffer[3]), splitBuffer[4]);
             }
             catch (Exception)
-            {
-                
-            }
+            { }
+            // This monstrosity is necesarry because of unsafe threading
+            // but hey, we have threads so it's a win in my book ¯\_(ツ)_/¯
         }
 
         /// <summary>

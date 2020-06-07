@@ -24,17 +24,12 @@ namespace AiriosApplication
 
             Socket listener = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Unspecified);
             try
-            {
-                // Bind to the endpoint
-                listener.Bind(localEndPoint);
-
-                // Start listening
+            {                
+                listener.Bind(localEndPoint);                
                 listener.Listen(10);
 
                 while (true)
-                {
-                    //MessageBox.Show($"HTTP Server listening on port {PORT}");
-
+                {     
                     // Get the next connection from the queue or wait
                     Socket clientSocket = listener.Accept();
 
@@ -47,9 +42,7 @@ namespace AiriosApplication
                 }
             }
             catch (Exception)
-            {
-                //tbStatus.Text = e.ToString();
-            }
+            { }
         }
     }
 }

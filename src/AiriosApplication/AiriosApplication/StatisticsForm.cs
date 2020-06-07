@@ -13,8 +13,6 @@ namespace AiriosApplication
 {
     public partial class StatisticsForm : Form
     {
-        private delegate void GraphHandler();
-        private GraphHandler grapher;
         public StatisticsForm()
         {
             InitializeComponent();
@@ -32,129 +30,82 @@ namespace AiriosApplication
             toolTip.SetToolTip(gbGraph, "Data from sensor visualized");
             toolTip.SetToolTip(chartStats, "Data from sensor visualized");
             toolTip.SetToolTip(gbData, "Collected data from sensors");
-       
 
-            chartStats.DataSource = Readings.Data;
+            // the default view of the dataTable has the data that is needed for graphing filtered (as in it's in the selected by the user timeframe)
+            chartStats.DataSource = Readings.Data.DefaultView;
             chartStats.DataBind();
-            grapher = GraphTemperature;
 
             dgvData.DataSource = Readings.Data;
             for (short i = 0; i < dgvData.Columns.Count; i++)
             {
                 dgvData.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvData.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            }                
-        }
+            }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            grapher = GraphTemperature;
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            grapher = GraphHumidity;
-        }
-
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            grapher = GraphCO2;
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            grapher = GraphVOC;
+            cmbDevice.DataSource = ApplicationForm.ConnectedDevices;
         }
 
         private void updateTimer_Tick(object sender, EventArgs e)
         {
-            grapher();            
+            if (rbTemperature.Checked)
+                Graph("Temperature");
+            else if (rbHumidity.Checked)
+                Graph("Humidity");
+            else if (rbVOC.Checked)
+                Graph("VOC");
+            else if (rbCO2.Checked)
+                Graph("CO2");
         }
 
-        private void GraphTemperature()
+        private void Graph(string column)
         {
             chartStats.Series.Clear();
-            chartStats.Series.Add("Temperature");
+            chartStats.Series.Add(column);
+
+            if (!cbAllTime.Checked)
+            { 
+                // this beauty here makes sure that if a certain day is selected we only graph the values from that day from the selected device
+                Readings.Data.DefaultView.RowFilter = "Timestamp > '" + dtpDate.Value.Date + "' and Timestamp < '" + dtpDate.Value.Date.AddDays(1) 
+                    + "' AND IP = '" + cmbDevice.SelectedItem.ToString() + "'";
+                chartStats.Series[0].XValueType = ChartValueType.Time;
+            }
+            else
+            { 
+                // if the user wants everything graphed we remove the filter and only leave the device filter
+                Readings.Data.DefaultView.RowFilter = "IP = '" + cmbDevice.SelectedItem.ToString() + "'"; 
+                chartStats.Series[0].XValueType = ChartValueType.DateTime;
+            }
+
             chartStats.Series[0].XValueMember = "Timestamp";
-            chartStats.Series[0].YValueMembers = "Temperature";
+            chartStats.Series[0].YValueMembers = column;
             chartStats.Series[0].ChartType = SeriesChartType.Line;
 
             try
             {
-                // Takes care of scaling - calculates the MIN and MAX values of the column
-                chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(Temperature)", null)) - 1;
-                chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(Temperature)", null)) + 1;
+                // we make a copy of the default view for dynamic scaling - otherwise if one day has high 
+                // values all of them will have a maximal Y axis value that is way too high and the graph looks ugly
+                DataTable dynamicScalingTable = Readings.Data.DefaultView.ToTable();
+                chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(dynamicScalingTable.Compute("MIN(" + column + ")", null)) - 5;
+                chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(dynamicScalingTable.Compute("MAX(" + column + ")", null)) + 5;
+
+                // temperature varies less so less scaling for it
+                if (column == "Temperature")
+                {
+                    chartStats.ChartAreas[0].AxisY.Minimum += 4;
+                    chartStats.ChartAreas[0].AxisY.Maximum -= 4;
+                }
             }
             catch (Exception) { }
+            // The compute function causes some problems            
 
-            chartStats.Series[0].LegendText = "Temperature";
-            chartStats.Series[0].XValueType = ChartValueType.Time;
+            chartStats.Series[0].LegendText = column;
             chartStats.Series[0].YValueType = ChartValueType.Int32;
             chartStats.Series[0].BorderWidth = 6;
         }
-
-        private void GraphHumidity()
+       
+        private void cbAllTime_CheckedChanged(object sender, EventArgs e)
         {
-            chartStats.Series.Clear();
-            chartStats.Series.Add("Humidity");
-            chartStats.Series[0].XValueMember = "Timestamp";
-            chartStats.Series[0].YValueMembers = "Humidity";
-            chartStats.Series[0].ChartType = SeriesChartType.Line;
-
-            try
-            {
-                chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(Humidity)", null)) - 5;
-                chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(Humidity)", null)) + 5;
-            }
-            catch (Exception) { }
-
-            chartStats.Series[0].LegendText = "Humidity";
-            chartStats.Series[0].XValueType = ChartValueType.Time;
-            chartStats.Series[0].YValueType = ChartValueType.Int32;
-            chartStats.Series[0].BorderWidth = 6;
-        }
-
-        private void GraphCO2()
-        {
-            chartStats.Series.Clear();
-            chartStats.Series.Add("CO2");
-            chartStats.Series[0].XValueMember = "Timestamp";
-            chartStats.Series[0].YValueMembers = "CO2";
-            chartStats.Series[0].ChartType = SeriesChartType.Line;
-
-            try
-            {
-                chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(CO2)", null)) - 5;
-                chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(CO2)", null)) + 5;
-            }
-            catch (Exception) { }
-
-            chartStats.Series[0].LegendText = "CO2";
-            chartStats.Series[0].XValueType = ChartValueType.Time;
-            chartStats.Series[0].YValueType = ChartValueType.Int32;
-            chartStats.Series[0].BorderWidth = 6;
-        }
-
-        private void GraphVOC()
-        {
-            chartStats.Series.Clear();
-            chartStats.Series.Add("VOC");
-            chartStats.Series[0].XValueMember = "Timestamp";
-            chartStats.Series[0].YValueMembers = "VOC";
-            chartStats.Series[0].ChartType = SeriesChartType.Line;
-
-            try
-            {
-                chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(Readings.Data.Compute("MIN(VOC)", null)) - 5;
-                chartStats.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(Readings.Data.Compute("MAX(VOC)", null)) + 5;
-            }
-            catch (Exception) { }
-
-            chartStats.Series[0].LegendText = "VOC";
-            chartStats.Series[0].XValueType = ChartValueType.Time;
-            chartStats.Series[0].YValueType = ChartValueType.Int32;
-            chartStats.Series[0].BorderWidth = 6;
+            dtpDate.Enabled = !dtpDate.Enabled;
         }
     }
 }
-

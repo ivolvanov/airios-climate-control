@@ -26,15 +26,12 @@ namespace AiriosApplication
             StreamWriter streamWriter = new StreamWriter(networkStream);
             string line = streamReader.ReadLine();
             // first line always contains the request.
-            string response;
-            Console.WriteLine(line);
-
+            string response;            
 
             string[] parts = line.Split(' ');
-            if (parts[0].ToUpper() == "GET")
-            {
-                response = "GET handled";
-            }
+            if (parts[0].ToUpper() == "GET")            
+                response = "GET handled";       
+            
             else if (parts[0].ToUpper() == "POST")
             {
                 string lline = "";
@@ -44,17 +41,11 @@ namespace AiriosApplication
                 {
                     lline = streamReader.ReadLine();
                     lline = lline.ToUpper();
-                    if (lline.StartsWith("CONTENT-LENGTH:"))
-                    {
-                        length = Int16.Parse(lline.Substring(16));
-                    }
+                    if (lline.StartsWith("CONTENT-LENGTH:"))                    
+                        length = Int16.Parse(lline.Substring(16));                    
                 }
-                buffer = new char[length];
-                lline = streamReader.ReadLine();
-                // Console.WriteLine(lline);            //empty line 
-                streamReader.Read(buffer, 0, length);
-                // Console.WriteLine(buffer);
-                string item = new string(buffer);
+                buffer = new char[length];                       
+                streamReader.Read(buffer, 0, length);                
                 Readings.GetValuesFromBuffer(buffer);
                 response = "POST handled";
             }
@@ -63,8 +54,7 @@ namespace AiriosApplication
                 streamWriter.WriteLine("HTTP/1.1 405 Method Not Allowed\r\n");
                 goto skipResponse;
             }
-
-            string uri = parts[2];
+                        
             streamWriter.Write("HTTP/1.1 200 OK\r\n");
             streamWriter.Write("Server: C# server\r\n");
             streamWriter.Write("Content-Type: text/plain\r\n");
@@ -74,10 +64,7 @@ namespace AiriosApplication
             streamWriter.Write(response);
 
         skipResponse:  //flag for goto on line 60
-            streamWriter.Flush();
-            // Client disconnected
-            // Console.WriteLine("Disconnect");
-            // Console.WriteLine();
+            streamWriter.Flush();            
             socket.Close();
         }
     }

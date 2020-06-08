@@ -17,7 +17,7 @@ namespace AiriosApplication
         {
             Thread.CurrentThread.IsBackground = true;
             const int PORT = 42069;
-            const string ADDRESS = "192.168.178.134"; //localhost IP, must be portforwarded with public IP later 
+            const string ADDRESS = "192.168.1.180"; //localhost IP, must be portforwarded with public IP later 
 
             IPAddress ipAddr = IPAddress.Parse(ADDRESS);
             IPEndPoint localEndPoint = new IPEndPoint(ipAddr, PORT);

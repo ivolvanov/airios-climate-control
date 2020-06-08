@@ -26,6 +26,9 @@ namespace AiriosApplication
             try
             {
                 splitBuffer[0] = splitBuffer[0].Replace("#%", "");
+                splitBuffer[0] = splitBuffer[0].Replace("#", "");
+                splitBuffer[1] = splitBuffer[1].Replace("%", "");
+                splitBuffer[3] = splitBuffer[3].Replace("%", "");
                 splitBuffer[0] = splitBuffer[0].Replace(".", ","); //doubles need to be with a comma instead of a .
                 splitBuffer[2] = splitBuffer[2].Replace(".", ",");
                 splitBuffer[4] = splitBuffer[4].Replace("$", "");                

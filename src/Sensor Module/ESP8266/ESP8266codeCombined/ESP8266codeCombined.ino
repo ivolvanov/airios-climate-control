@@ -2,10 +2,10 @@
 #include <ESP8266HTTPClient.h>
 #include <SoftwareSerial.h>
 
-#define SSIDWiFi "TP-Link_5C6C"
-#define passwordWiFi "49188714"
+#define SSIDWiFi "Vasilevi"
+#define passwordWiFi "vnet1vnet1"
 
-const String IP = "192.168.0.105";
+const String IP = "192.168.1.180";
 const String PORT = "42069";
 const String uriServer = "http://" + IP + ":" + PORT;
 
@@ -17,6 +17,7 @@ String GETrequest();
 void setup() {
   Serial.begin(9600);
   ss.begin(9600);
+  pinMode(D5, OUTPUT);
   Serial.println("Setup initiated.");
   WiFi.begin(SSIDWiFi, passwordWiFi);
   while (WiFi.status() != WL_CONNECTED)
@@ -69,7 +70,8 @@ String POSTrequest(String dataSent)
     http.begin(uriServer);
 
     int httpCode = http.POST(dataSent);
-    if (httpCode > 0) {
+    if (httpCode > 0) 
+    {
       // HTTP header has been send and Server response header has been handled
       Serial.printf("HTTP response code: %d\n", httpCode);
 
@@ -77,12 +79,14 @@ String POSTrequest(String dataSent)
       {
         String payload = http.getString();
         Serial.println("Response from server: " + payload);
+        digitalWrite(D5, LOW);
         return payload;
       }
     }
     else
     {
       Serial.printf("Request Failed - %s\n", http.errorToString(httpCode).c_str());
+      digitalWrite(D5, HIGH);
     }
 
     http.end();

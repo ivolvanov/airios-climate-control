@@ -13,6 +13,7 @@ void setup()
   Serial.begin(9600);
   serialco2.begin(9600);
   serialESP.begin(9600);
+  pinMode(D10, OUTPUT);
   Wire.begin();
   SHT30setup();
   checkSerialESP = millis();
@@ -67,9 +68,23 @@ void loop()
     if (!once)
     {
       if (oldco2 - 80 >= co2 || oldco2 + 80 <= co2)
+      {
         co2Spike = true;
-      if (oldvoc - 30 >= co2 || oldvoc + 30 <= voc)  
+        digitalWrite(D10, LOW);
+      }
+      else
+      {
+        digitalWrite(D10, HIGH);
+      }
+      if (oldvoc - 30 >= co2 || oldvoc + 30 <= voc)
+      {  
         vocSpike = true;
+        digitalWrite(D10, LOW);
+      }
+      else
+      {
+        digitalWrite(D10, HIGH);
+      }
       oldco2 = co2;
       oldvoc = voc;
     }

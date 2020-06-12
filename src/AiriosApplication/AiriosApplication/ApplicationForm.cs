@@ -44,8 +44,8 @@ namespace AiriosApplication
             toolTip.SetToolTip(lbTVOC, "Total volatile organic compounds in parts-per-billion");
             toolTip.SetToolTip(picCO2, "Carbon dioxide in parts-per-million");
             toolTip.SetToolTip(lbCO2, "Carbon dioxide in parts-per-million");
-            toolTip.SetToolTip(picIP, "Current IP being displayed\nClick on any icon or value to switch between modules");
-            toolTip.SetToolTip(lbIP, "Current IP being displayed\nClick on any icon or value to switch between modules");
+            toolTip.SetToolTip(picID, "ID of current device\nClick on any icon or value to switch between modules");
+            toolTip.SetToolTip(lblID, "ID of current device\nClick on any icon or value to switch between modules");
         }
 
         private void dataRefreshTimer_Tick(object sender, EventArgs e)
@@ -59,18 +59,18 @@ namespace AiriosApplication
                 {
                     for (int i = 0; i < Readings.Data.Rows.Count; i++)
                     {
-                        // add IPs of deviced previously connected
-                        if (!connectedDevices.Contains(Readings.Data.Rows[i]["IP"]))
-                            connectedDevices.Add(Readings.Data.Rows[i]["IP"].ToString());
+                        // add IDs of deviced previously connected
+                        if (!connectedDevices.Contains(Readings.Data.Rows[i]["ID"]))
+                            connectedDevices.Add(Readings.Data.Rows[i]["ID"].ToString());
                     }
-                    selectedDevice = Readings.Data.Rows[Readings.Data.Rows.Count - 1]["IP"].ToString();
+                    selectedDevice = Readings.Data.Rows[Readings.Data.Rows.Count - 1]["ID"].ToString();
                     once = false;
                 }
-                if (!connectedDevices.Contains(Readings.Data.Rows[Readings.Data.Rows.Count - 1]["IP"].ToString()))
-                    connectedDevices.Add(Readings.Data.Rows[Readings.Data.Rows.Count - 1]["IP"].ToString());
+                if (!connectedDevices.Contains(Readings.Data.Rows[Readings.Data.Rows.Count - 1]["ID"].ToString()))
+                    connectedDevices.Add(Readings.Data.Rows[Readings.Data.Rows.Count - 1]["ID"].ToString());
                 for (int i = Readings.Data.Rows.Count - 1; i >= 0; i--)
                 {
-                    if (Readings.Data.Rows[i]["IP"].ToString() == selectedDevice)
+                    if (Readings.Data.Rows[i]["ID"].ToString() == selectedDevice)
                     {
                         // these bad boy magic numbers set the thresholds for the different label colors
                         lbCO2.Text = Readings.Data.Rows[i]["CO2"].ToString() + " ppm";
@@ -85,7 +85,7 @@ namespace AiriosApplication
                         lbTVOC.Text = Readings.Data.Rows[i]["VOC"].ToString() + " ppb";
                         SetColor(lbTVOC, i, "VOC", 0, 350, 500, 350, 500);
 
-                        lbIP.Text = Readings.Data.Rows[i]["IP"].ToString();
+                        lblID.Text = Readings.Data.Rows[i]["ID"].ToString();
                         break;
                     }
                 }
@@ -133,7 +133,7 @@ namespace AiriosApplication
             Readings.Data.Columns.Add("Humidity", typeof(double));
             Readings.Data.Columns.Add("CO2", typeof(int));
             Readings.Data.Columns.Add("VOC", typeof(int));
-            Readings.Data.Columns.Add("IP", typeof(string));
+            Readings.Data.Columns.Add("ID", typeof(string));
 
             // takes care of loading the previous readings
             FileStream fileStream = new FileStream("Readings.xml", FileMode.OpenOrCreate);
@@ -194,7 +194,6 @@ namespace AiriosApplication
                 else
                     selectedDevice = connectedDevices[0];
             }
-            // MessageBox.Show("ZDR " + connectedDevices.Count.ToString());
         }
 
         private void ApplicationForm_FormClosing(object sender, FormClosingEventArgs e)

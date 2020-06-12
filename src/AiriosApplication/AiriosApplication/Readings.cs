@@ -13,9 +13,7 @@ namespace AiriosApplication
 {
     public static class Readings
     {
-        private static DataTable data = new DataTable();
-        private static Dictionary<string, string> ipMask = new Dictionary<string, string>();
-        private static int counterRooms = 1;
+        private static DataTable data = new DataTable();   
 
         public static DataTable Data { get { return data; }  set { data = value; } }
         /// <summary>
@@ -34,9 +32,7 @@ namespace AiriosApplication
                 splitBuffer[3] = splitBuffer[3].Replace("%", "");
                 splitBuffer[0] = splitBuffer[0].Replace(".", ","); //doubles need to be with a comma instead of a .
                 splitBuffer[2] = splitBuffer[2].Replace(".", ",");
-                splitBuffer[4] = splitBuffer[4].Replace("$", "");
-                ipMask.Add(splitBuffer[4], "Room " + counterRooms.ToString());
-                counterRooms++;
+                splitBuffer[4] = splitBuffer[4].Replace("$", "");                
                 Data.Rows.Add(DateTime.Now, Convert.ToDouble(splitBuffer[0]), Convert.ToDouble(splitBuffer[2]),
                     Convert.ToInt32(splitBuffer[1]), Convert.ToInt32(splitBuffer[3]), splitBuffer[4]);
             }

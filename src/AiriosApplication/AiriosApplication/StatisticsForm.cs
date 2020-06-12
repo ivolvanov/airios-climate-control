@@ -66,13 +66,13 @@ namespace AiriosApplication
             { 
                 // this beauty here makes sure that if a certain day is selected we only graph the values from that day from the selected device
                 Readings.Data.DefaultView.RowFilter = "Timestamp > '" + dtpDate.Value.Date + "' and Timestamp < '" + dtpDate.Value.Date.AddDays(1) 
-                    + "' AND IP = '" + cmbDevice.SelectedItem.ToString() + "'";
+                    + "' AND ID = '" + cmbDevice.SelectedItem.ToString() + "'";
                 chartStats.Series[0].XValueType = ChartValueType.Time;
             }
             else
             { 
                 // if the user wants everything graphed we remove the filter and only leave the device filter
-                Readings.Data.DefaultView.RowFilter = "IP = '" + cmbDevice.SelectedItem.ToString() + "'"; 
+                Readings.Data.DefaultView.RowFilter = "ID = '" + cmbDevice.SelectedItem.ToString() + "'"; 
                 chartStats.Series[0].XValueType = ChartValueType.DateTime;
             }
 

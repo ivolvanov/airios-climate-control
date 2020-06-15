@@ -55,7 +55,7 @@ namespace AiriosApplication
 
                     buffer = new char[length];
                     streamReader.Read(buffer, 0, length);
-                    Console.WriteLine(buffer);   //debugging
+                    //Console.WriteLine(buffer);   //debugging
                     Readings.GetValuesFromBuffer(buffer);
                     response = "POST handled";
                 }

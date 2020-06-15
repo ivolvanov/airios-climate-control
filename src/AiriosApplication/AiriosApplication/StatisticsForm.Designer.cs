@@ -30,7 +30,9 @@
       {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.chartStats = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.gbGraph = new System.Windows.Forms.GroupBox();
             this.gbData = new System.Windows.Forms.GroupBox();
@@ -54,13 +56,32 @@
             // 
             // chartStats
             // 
+            this.chartStats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(107)))));
+            chartArea1.AxisX.IsLabelAutoFit = false;
+            chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            chartArea1.AxisX.LineColor = System.Drawing.Color.White;
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(98)))), ((int)(((byte)(101)))), ((int)(((byte)(157)))));
+            chartArea1.AxisY.IsLabelAutoFit = false;
+            chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            chartArea1.AxisY.LineColor = System.Drawing.Color.White;
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(98)))), ((int)(((byte)(101)))), ((int)(((byte)(157)))));
+            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(107)))));
             chartArea1.Name = "ChartArea1";
             this.chartStats.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartStats.Legends.Add(legend1);
+            this.chartStats.Cursor = System.Windows.Forms.Cursors.Default;
             this.chartStats.Location = new System.Drawing.Point(8, 28);
             this.chartStats.Name = "chartStats";
-            this.chartStats.Size = new System.Drawing.Size(1439, 382);
+            series1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            series1.BorderWidth = 5;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(220)))), ((int)(((byte)(88)))));
+            series1.Name = "Series1";
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
+            this.chartStats.Series.Add(series1);
+            this.chartStats.Size = new System.Drawing.Size(1439, 355);
             this.chartStats.TabIndex = 0;
             this.chartStats.Text = "Measured data";
             // 
@@ -68,9 +89,10 @@
             // 
             this.gbGraph.Controls.Add(this.chartStats);
             this.gbGraph.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbGraph.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
             this.gbGraph.Location = new System.Drawing.Point(12, 12);
             this.gbGraph.Name = "gbGraph";
-            this.gbGraph.Size = new System.Drawing.Size(1453, 416);
+            this.gbGraph.Size = new System.Drawing.Size(1453, 389);
             this.gbGraph.TabIndex = 1;
             this.gbGraph.TabStop = false;
             this.gbGraph.Text = "Graph";
@@ -79,9 +101,10 @@
             // 
             this.gbData.Controls.Add(this.dgvData);
             this.gbData.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbData.Location = new System.Drawing.Point(7, 473);
+            this.gbData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.gbData.Location = new System.Drawing.Point(12, 407);
             this.gbData.Name = "gbData";
-            this.gbData.Size = new System.Drawing.Size(1458, 275);
+            this.gbData.Size = new System.Drawing.Size(928, 192);
             this.gbData.TabIndex = 2;
             this.gbData.TabStop = false;
             this.gbData.Text = "Data";
@@ -90,43 +113,66 @@
             // 
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
+            this.dgvData.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(107)))));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(107)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(220)))), ((int)(((byte)(88)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.Location = new System.Drawing.Point(13, 28);
+            this.dgvData.EnableHeadersVisualStyles = false;
+            this.dgvData.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.dgvData.Location = new System.Drawing.Point(6, 23);
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
-            this.dgvData.Size = new System.Drawing.Size(1439, 246);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(107)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(220)))), ((int)(((byte)(88)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvData.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvData.Size = new System.Drawing.Size(916, 163);
             this.dgvData.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(30, 442);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.label1.Location = new System.Drawing.Point(984, 415);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 18);
+            this.label1.Size = new System.Drawing.Size(72, 25);
             this.label1.TabIndex = 1;
             this.label1.Text = "Graph:";
             // 
             // rbTemperature
             // 
             this.rbTemperature.AutoSize = true;
+            this.rbTemperature.BackColor = System.Drawing.Color.Transparent;
             this.rbTemperature.Checked = true;
-            this.rbTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbTemperature.Location = new System.Drawing.Point(124, 440);
+            this.rbTemperature.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbTemperature.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.rbTemperature.Location = new System.Drawing.Point(967, 443);
             this.rbTemperature.Name = "rbTemperature";
-            this.rbTemperature.Size = new System.Drawing.Size(110, 22);
+            this.rbTemperature.Size = new System.Drawing.Size(136, 29);
             this.rbTemperature.TabIndex = 3;
             this.rbTemperature.TabStop = true;
             this.rbTemperature.Text = "Temperature";
-            this.rbTemperature.UseVisualStyleBackColor = true;
+            this.rbTemperature.UseVisualStyleBackColor = false;
             // 
             // rbHumidity
             // 
             this.rbHumidity.AutoSize = true;
-            this.rbHumidity.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbHumidity.Location = new System.Drawing.Point(253, 440);
+            this.rbHumidity.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbHumidity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.rbHumidity.Location = new System.Drawing.Point(967, 478);
             this.rbHumidity.Name = "rbHumidity";
-            this.rbHumidity.Size = new System.Drawing.Size(83, 22);
+            this.rbHumidity.Size = new System.Drawing.Size(106, 29);
             this.rbHumidity.TabIndex = 4;
             this.rbHumidity.Text = "Humidity";
             this.rbHumidity.UseVisualStyleBackColor = true;
@@ -134,10 +180,11 @@
             // rbVOC
             // 
             this.rbVOC.AutoSize = true;
-            this.rbVOC.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbVOC.Location = new System.Drawing.Point(429, 440);
+            this.rbVOC.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbVOC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.rbVOC.Location = new System.Drawing.Point(967, 548);
             this.rbVOC.Name = "rbVOC";
-            this.rbVOC.Size = new System.Drawing.Size(58, 22);
+            this.rbVOC.Size = new System.Drawing.Size(68, 29);
             this.rbVOC.TabIndex = 6;
             this.rbVOC.Text = "VOC";
             this.rbVOC.UseVisualStyleBackColor = true;
@@ -145,45 +192,47 @@
             // rbCO2
             // 
             this.rbCO2.AutoSize = true;
-            this.rbCO2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbCO2.Location = new System.Drawing.Point(353, 440);
+            this.rbCO2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbCO2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.rbCO2.Location = new System.Drawing.Point(967, 513);
             this.rbCO2.Name = "rbCO2";
-            this.rbCO2.Size = new System.Drawing.Size(57, 22);
+            this.rbCO2.Size = new System.Drawing.Size(65, 29);
             this.rbCO2.TabIndex = 5;
             this.rbCO2.Text = "CO2";
             this.rbCO2.UseVisualStyleBackColor = true;
             // 
             // updateTimer
             // 
-            this.updateTimer.Enabled = true;
             this.updateTimer.Interval = 1000;
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
             // dtpDate
             // 
-            this.dtpDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpDate.Location = new System.Drawing.Point(663, 440);
+            this.dtpDate.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpDate.Location = new System.Drawing.Point(1146, 443);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(200, 24);
+            this.dtpDate.Size = new System.Drawing.Size(297, 33);
             this.dtpDate.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(505, 442);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.label2.Location = new System.Drawing.Point(1195, 415);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(139, 18);
+            this.label2.Size = new System.Drawing.Size(195, 25);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Select date to graph";
+            this.label2.Text = "Select date to graph:";
             // 
             // cbAllTime
             // 
             this.cbAllTime.AutoSize = true;
-            this.cbAllTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbAllTime.Location = new System.Drawing.Point(887, 441);
+            this.cbAllTime.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbAllTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.cbAllTime.Location = new System.Drawing.Point(1200, 482);
             this.cbAllTime.Name = "cbAllTime";
-            this.cbAllTime.Size = new System.Drawing.Size(143, 22);
+            this.cbAllTime.Size = new System.Drawing.Size(180, 29);
             this.cbAllTime.TabIndex = 9;
             this.cbAllTime.Text = "Show all readings";
             this.cbAllTime.UseVisualStyleBackColor = true;
@@ -191,30 +240,32 @@
             // 
             // cmbDevice
             // 
+            this.cmbDevice.BackColor = System.Drawing.Color.White;
             this.cmbDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDevice.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDevice.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDevice.FormattingEnabled = true;
-            this.cmbDevice.Location = new System.Drawing.Point(1308, 439);
+            this.cmbDevice.Location = new System.Drawing.Point(1107, 556);
             this.cmbDevice.Name = "cmbDevice";
-            this.cmbDevice.Size = new System.Drawing.Size(151, 26);
+            this.cmbDevice.Size = new System.Drawing.Size(352, 33);
             this.cmbDevice.TabIndex = 10;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(1036, 442);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.label3.Location = new System.Drawing.Point(1102, 528);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(266, 18);
+            this.label3.Size = new System.Drawing.Size(362, 25);
             this.label3.TabIndex = 11;
-            this.label3.Text = "Select which device\'s readings to graph";
+            this.label3.Text = "Select which device\'s readings to graph:";
             // 
             // StatisticsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1477, 760);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(107)))));
+            this.ClientSize = new System.Drawing.Size(1477, 607);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbDevice);
             this.Controls.Add(this.cbAllTime);
@@ -227,6 +278,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.gbData);
             this.Controls.Add(this.gbGraph);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "StatisticsForm";
             this.Text = "Statistics";

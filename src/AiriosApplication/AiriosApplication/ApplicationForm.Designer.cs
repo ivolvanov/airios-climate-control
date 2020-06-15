@@ -52,6 +52,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picTVOC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTemp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHumid)).BeginInit();
+            this.panelSwitch.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbTime
@@ -68,7 +69,7 @@
             // 
             // dataRefreshTimer
             // 
-            this.dataRefreshTimer.Interval = 500;
+            this.dataRefreshTimer.Interval = 1000;
             this.dataRefreshTimer.Tick += new System.EventHandler(this.dataRefreshTimer_Tick);
             // 
             // lbDate
@@ -142,11 +143,11 @@
             // btnMore
             // 
             this.btnMore.BackColor = System.Drawing.Color.Transparent;
-            this.btnMore.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMore.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMore.ForeColor = System.Drawing.Color.Black;
-            this.btnMore.Location = new System.Drawing.Point(287, 250);
+            this.btnMore.Location = new System.Drawing.Point(259, 140);
             this.btnMore.Name = "btnMore";
-            this.btnMore.Size = new System.Drawing.Size(43, 21);
+            this.btnMore.Size = new System.Drawing.Size(65, 25);
             this.btnMore.TabIndex = 15;
             this.btnMore.Text = "More";
             this.btnMore.UseVisualStyleBackColor = false;
@@ -226,11 +227,11 @@
             // btnFan
             // 
             this.btnFan.BackColor = System.Drawing.Color.Transparent;
-            this.btnFan.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFan.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFan.ForeColor = System.Drawing.Color.Black;
-            this.btnFan.Location = new System.Drawing.Point(238, 250);
+            this.btnFan.Location = new System.Drawing.Point(188, 140);
             this.btnFan.Name = "btnFan";
-            this.btnFan.Size = new System.Drawing.Size(43, 21);
+            this.btnFan.Size = new System.Drawing.Size(65, 25);
             this.btnFan.TabIndex = 19;
             this.btnFan.Text = "Fan";
             this.btnFan.UseVisualStyleBackColor = false;
@@ -238,9 +239,11 @@
             // 
             // panelSwitch
             // 
+            this.panelSwitch.Controls.Add(this.btnFan);
+            this.panelSwitch.Controls.Add(this.btnMore);
             this.panelSwitch.Location = new System.Drawing.Point(3, 106);
             this.panelSwitch.Name = "panelSwitch";
-            this.panelSwitch.Size = new System.Drawing.Size(195, 165);
+            this.panelSwitch.Size = new System.Drawing.Size(327, 165);
             this.panelSwitch.TabIndex = 20;
             this.panelSwitch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelSwitch_MouseClick);
             // 
@@ -250,10 +253,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(342, 283);
-            this.Controls.Add(this.btnFan);
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.picID);
-            this.Controls.Add(this.btnMore);
             this.Controls.Add(this.lbUnderscore);
             this.Controls.Add(this.picCO2);
             this.Controls.Add(this.lbCO2);
@@ -280,6 +281,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picTVOC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTemp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHumid)).EndInit();
+            this.panelSwitch.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

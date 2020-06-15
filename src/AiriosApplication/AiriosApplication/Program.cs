@@ -15,8 +15,8 @@ namespace AiriosApplication
       static void Main()
       {
          Application.EnableVisualStyles();
-         Application.SetCompatibleTextRenderingDefault(false);
-         Application.Run(new ApplicationForm());
+         Application.SetCompatibleTextRenderingDefault(false);            
+         Application.Run(new ApplicationForm());                  
       }
    }
 }

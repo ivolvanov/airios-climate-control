@@ -44,52 +44,56 @@ namespace AiriosApplication
             toolTip.SetToolTip(lbTVOC, "Total volatile organic compounds in parts-per-billion");
             toolTip.SetToolTip(picCO2, "Carbon dioxide in parts-per-million");
             toolTip.SetToolTip(lbCO2, "Carbon dioxide in parts-per-million");
-            toolTip.SetToolTip(picIP, "Current IP being displayed\nClick on any icon or value to switch between modules");
-            toolTip.SetToolTip(lbIP, "Current IP being displayed\nClick on any icon or value to switch between modules");
+            toolTip.SetToolTip(picID, "ID of current device\nClick on any icon or value to switch between modules");
+            toolTip.SetToolTip(lblID, "ID of current device\nClick on any icon or value to switch between modules");
         }
 
         private void dataRefreshTimer_Tick(object sender, EventArgs e)
         {
+            dataRefreshTimer.Stop();
             lbDate.Text = DateTime.Now.ToLongDateString(); // Set date
             lbTime.Text = DateTime.Now.ToShortTimeString(); // Set time
-
-            if (Readings.Data.Rows.Count != 0)
+            lock (Readings.readingsLock)
             {
-                if (once)
+                if (Readings.Data.Rows.Count != 0)
                 {
-                    for (int i = 0; i < Readings.Data.Rows.Count; i++)
+                    if (once)
                     {
-                        // add IPs of deviced previously connected
-                        if (!connectedDevices.Contains(Readings.Data.Rows[i]["IP"]))
-                            connectedDevices.Add(Readings.Data.Rows[i]["IP"].ToString());
+                        for (int i = 0; i < Readings.Data.Rows.Count; i++)
+                        {
+                            // add IDs of deviced previously connected
+                            if (!connectedDevices.Contains(Readings.Data.Rows[i]["ID"]))
+                                connectedDevices.Add(Readings.Data.Rows[i]["ID"].ToString());
+                        }
+                        selectedDevice = Readings.Data.Rows[Readings.Data.Rows.Count - 1]["ID"].ToString();
+                        once = false;
                     }
-                    selectedDevice = Readings.Data.Rows[Readings.Data.Rows.Count - 1]["IP"].ToString();
-                    once = false;
-                }
-                if (!connectedDevices.Contains(Readings.Data.Rows[Readings.Data.Rows.Count - 1]["IP"].ToString()))
-                    connectedDevices.Add(Readings.Data.Rows[Readings.Data.Rows.Count - 1]["IP"].ToString());
-                for (int i = Readings.Data.Rows.Count - 1; i >= 0; i--)
-                {
-                    if (Readings.Data.Rows[i]["IP"].ToString() == selectedDevice)
+                    if (!connectedDevices.Contains(Readings.Data.Rows[Readings.Data.Rows.Count - 1]["ID"].ToString()))
+                        connectedDevices.Add(Readings.Data.Rows[Readings.Data.Rows.Count - 1]["ID"].ToString());
+                    for (int i = Readings.Data.Rows.Count - 1; i >= 0; i--)
                     {
-                        // these bad boy magic numbers set the thresholds for the different label colors
-                        lbCO2.Text = Readings.Data.Rows[i]["CO2"].ToString() + " ppm";
-                        SetColor(lbCO2, i, "CO2", 0, 1000, 2000, 1000, 2000);
+                        if (Readings.Data.Rows[i]["ID"].ToString() == selectedDevice)
+                        {
+                            // these bad boy magic numbers set the thresholds for the different label colors
+                            lbCO2.Text = Readings.Data.Rows[i]["CO2"].ToString() + " ppm";
+                            SetColor(lbCO2, i, "CO2", 0, 1000, 2000, 1000, 2000);
 
-                        lbTemp.Text = Readings.Data.Rows[i]["Temperature"].ToString() + "℃";
-                        SetColor(lbTemp, i, "Temperature", 15, 25, 35, 5, 15);
+                            lbTemp.Text = Readings.Data.Rows[i]["Temperature"].ToString() + "℃";
+                            SetColor(lbTemp, i, "Temperature", 15, 25, 35, 5, 15);
 
-                        lbHumid.Text = Readings.Data.Rows[i]["Humidity"].ToString() + "%";
-                        SetColor(lbHumid, i, "Humidity", 35, 65, 85, 25, 35);
+                            lbHumid.Text = Readings.Data.Rows[i]["Humidity"].ToString() + "%";
+                            SetColor(lbHumid, i, "Humidity", 35, 65, 85, 25, 35);
 
-                        lbTVOC.Text = Readings.Data.Rows[i]["VOC"].ToString() + " ppb";
-                        SetColor(lbTVOC, i, "VOC", 0, 350, 500, 350, 500);
+                            lbTVOC.Text = Readings.Data.Rows[i]["VOC"].ToString() + " ppb";
+                            SetColor(lbTVOC, i, "VOC", 0, 350, 500, 350, 500);
 
-                        lbIP.Text = Readings.Data.Rows[i]["IP"].ToString();
-                        break;
+                            lblID.Text = Readings.Data.Rows[i]["ID"].ToString();
+                            break;
+                        }
                     }
                 }
             }
+            dataRefreshTimer.Start();
         }
 
         /// <summary>
@@ -106,18 +110,14 @@ namespace AiriosApplication
         private void SetColor(Label label, int row, string column, int greenLower, int greenUpper,
             int orangeUpper, int orangeLower1, int orangeUpper1)
         {
-            try
-            {
-                if (Convert.ToDouble(Readings.Data.Rows[row][column]) > greenLower && Convert.ToDouble(Readings.Data.Rows[row][column]) < greenUpper)
-                    label.ForeColor = Color.Green;
-                else if ((Convert.ToDouble(Readings.Data.Rows[row][column]) >= greenUpper && Convert.ToDouble(Readings.Data.Rows[row][column]) <= orangeUpper) ||
-                    (Convert.ToDouble(Readings.Data.Rows[row][column]) >= orangeLower1 && Convert.ToDouble(Readings.Data.Rows[row][column]) <= orangeUpper1))
-                    label.ForeColor = Color.Orange;
-                else
-                    label.ForeColor = Color.Red;
-            }
-            catch (Exception) { } 
-            // sometimes it says there is no row at the index even though we're looping through rows.Count?            
+
+            if (Convert.ToDouble(Readings.Data.Rows[row][column]) > greenLower && Convert.ToDouble(Readings.Data.Rows[row][column]) < greenUpper)
+                label.ForeColor = Color.Green;
+            else if ((Convert.ToDouble(Readings.Data.Rows[row][column]) >= greenUpper && Convert.ToDouble(Readings.Data.Rows[row][column]) <= orangeUpper) ||
+                (Convert.ToDouble(Readings.Data.Rows[row][column]) >= orangeLower1 && Convert.ToDouble(Readings.Data.Rows[row][column]) <= orangeUpper1))
+                label.ForeColor = Color.Orange;
+            else
+                label.ForeColor = Color.Red;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -133,7 +133,7 @@ namespace AiriosApplication
             Readings.Data.Columns.Add("Humidity", typeof(double));
             Readings.Data.Columns.Add("CO2", typeof(int));
             Readings.Data.Columns.Add("VOC", typeof(int));
-            Readings.Data.Columns.Add("IP", typeof(string));
+            Readings.Data.Columns.Add("ID", typeof(string));
 
             // takes care of loading the previous readings
             FileStream fileStream = new FileStream("Readings.xml", FileMode.OpenOrCreate);
@@ -173,15 +173,10 @@ namespace AiriosApplication
 
         private void autoSaver_Tick(object sender, EventArgs e)
         {
-            // periodically saves the readings taken (currently once every 10 mins)
             FileStream fileStream = new FileStream("Readings.xml", FileMode.Open);
-            try
-            {
+            lock (Readings.readingsLock)
                 Readings.Data.WriteXml(fileStream);
-                fileStream.Close();
-            }
-            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
-            finally { fileStream.Close(); }
+            fileStream.Close();
         }
 
         private void panelSwitch_MouseClick(object sender, MouseEventArgs e)
@@ -194,19 +189,14 @@ namespace AiriosApplication
                 else
                     selectedDevice = connectedDevices[0];
             }
-            // MessageBox.Show("ZDR " + connectedDevices.Count.ToString());
         }
 
         private void ApplicationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             FileStream fileStream = new FileStream("Readings.xml", FileMode.Open);
-            try
-            {
+            lock (Readings.readingsLock)
                 Readings.Data.WriteXml(fileStream);
-                fileStream.Close();
-            }
-            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
-            finally { fileStream.Close(); }
+            fileStream.Close();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace AiriosApplication
         {
             this.socket = socket;
         }
-       
+
         public void Run()
         {
             try
@@ -25,7 +25,7 @@ namespace AiriosApplication
                 NetworkStream networkStream = new NetworkStream(socket);
                 StreamReader streamReader = new StreamReader(networkStream);
                 StreamWriter streamWriter = new StreamWriter(networkStream);
-           
+
                 string line = streamReader.ReadLine();
 
                 // first line always contains the request.
@@ -55,7 +55,7 @@ namespace AiriosApplication
 
                     buffer = new char[length];
                     streamReader.Read(buffer, 0, length);
-                    Console.WriteLine(buffer);   //debugging
+                    //Console.WriteLine(buffer);   //debugging                    
                     Readings.GetValuesFromBuffer(buffer);
                     response = "POST handled";
                 }
@@ -64,7 +64,7 @@ namespace AiriosApplication
                     streamWriter.WriteLine("HTTP/1.1 405 Method Not Allowed\r\n");
                     goto skipResponse;
                 }
-            
+
                 streamWriter.Write("HTTP/1.1 200 OK\r\n");
                 streamWriter.Write("Server: C# server\r\n");
                 streamWriter.Write("Content-Type: text/plain\r\n");
@@ -73,8 +73,8 @@ namespace AiriosApplication
                 streamWriter.Write("\r\n");
                 streamWriter.Write(response);
 
-                skipResponse:  //flag for goto on line 60
-                streamWriter.Flush();            
+            skipResponse:  //flag for goto on line 60
+                streamWriter.Flush();
                 socket.Close();
             }
             catch (Exception)

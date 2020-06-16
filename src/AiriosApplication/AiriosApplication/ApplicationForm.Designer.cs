@@ -38,8 +38,8 @@
             this.lbCO2 = new System.Windows.Forms.Label();
             this.lbUnderscore = new System.Windows.Forms.Label();
             this.btnMore = new System.Windows.Forms.Button();
-            this.lbIP = new System.Windows.Forms.Label();
-            this.picIP = new System.Windows.Forms.PictureBox();
+            this.lblID = new System.Windows.Forms.Label();
+            this.picID = new System.Windows.Forms.PictureBox();
             this.picCO2 = new System.Windows.Forms.PictureBox();
             this.picTVOC = new System.Windows.Forms.PictureBox();
             this.picTemp = new System.Windows.Forms.PictureBox();
@@ -47,11 +47,12 @@
             this.autoSaver = new System.Windows.Forms.Timer(this.components);
             this.btnFan = new System.Windows.Forms.Button();
             this.panelSwitch = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.picIP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCO2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTVOC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTemp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHumid)).BeginInit();
+            this.panelSwitch.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbTime
@@ -68,7 +69,7 @@
             // 
             // dataRefreshTimer
             // 
-            this.dataRefreshTimer.Interval = 500;
+            this.dataRefreshTimer.Interval = 1000;
             this.dataRefreshTimer.Tick += new System.EventHandler(this.dataRefreshTimer_Tick);
             // 
             // lbDate
@@ -142,37 +143,37 @@
             // btnMore
             // 
             this.btnMore.BackColor = System.Drawing.Color.Transparent;
-            this.btnMore.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMore.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMore.ForeColor = System.Drawing.Color.Black;
-            this.btnMore.Location = new System.Drawing.Point(287, 250);
+            this.btnMore.Location = new System.Drawing.Point(259, 140);
             this.btnMore.Name = "btnMore";
-            this.btnMore.Size = new System.Drawing.Size(43, 21);
+            this.btnMore.Size = new System.Drawing.Size(65, 25);
             this.btnMore.TabIndex = 15;
             this.btnMore.Text = "More";
             this.btnMore.UseVisualStyleBackColor = false;
             this.btnMore.Click += new System.EventHandler(this.btnMore_Click);
             // 
-            // lbIP
+            // lblID
             // 
-            this.lbIP.AutoSize = true;
-            this.lbIP.BackColor = System.Drawing.Color.White;
-            this.lbIP.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.lbIP.ForeColor = System.Drawing.Color.Black;
-            this.lbIP.Location = new System.Drawing.Point(48, 235);
-            this.lbIP.Name = "lbIP";
-            this.lbIP.Size = new System.Drawing.Size(64, 25);
-            this.lbIP.TabIndex = 17;
-            this.lbIP.Text = "0.0.0.0";
+            this.lblID.AutoSize = true;
+            this.lblID.BackColor = System.Drawing.Color.White;
+            this.lblID.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.lblID.ForeColor = System.Drawing.Color.Black;
+            this.lblID.Location = new System.Drawing.Point(48, 235);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(30, 25);
+            this.lblID.TabIndex = 17;
+            this.lblID.Text = "ID";
             // 
-            // picIP
+            // picID
             // 
-            this.picIP.Image = global::AiriosApplication.Properties.Resources.ip_address;
-            this.picIP.Location = new System.Drawing.Point(18, 236);
-            this.picIP.Name = "picIP";
-            this.picIP.Size = new System.Drawing.Size(24, 24);
-            this.picIP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.picIP.TabIndex = 16;
-            this.picIP.TabStop = false;
+            this.picID.Image = global::AiriosApplication.Properties.Resources.ip_address;
+            this.picID.Location = new System.Drawing.Point(18, 236);
+            this.picID.Name = "picID";
+            this.picID.Size = new System.Drawing.Size(24, 24);
+            this.picID.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picID.TabIndex = 16;
+            this.picID.TabStop = false;
             // 
             // picCO2
             // 
@@ -226,11 +227,11 @@
             // btnFan
             // 
             this.btnFan.BackColor = System.Drawing.Color.Transparent;
-            this.btnFan.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFan.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFan.ForeColor = System.Drawing.Color.Black;
-            this.btnFan.Location = new System.Drawing.Point(238, 250);
+            this.btnFan.Location = new System.Drawing.Point(188, 140);
             this.btnFan.Name = "btnFan";
-            this.btnFan.Size = new System.Drawing.Size(43, 21);
+            this.btnFan.Size = new System.Drawing.Size(65, 25);
             this.btnFan.TabIndex = 19;
             this.btnFan.Text = "Fan";
             this.btnFan.UseVisualStyleBackColor = false;
@@ -238,9 +239,11 @@
             // 
             // panelSwitch
             // 
+            this.panelSwitch.Controls.Add(this.btnFan);
+            this.panelSwitch.Controls.Add(this.btnMore);
             this.panelSwitch.Location = new System.Drawing.Point(3, 106);
             this.panelSwitch.Name = "panelSwitch";
-            this.panelSwitch.Size = new System.Drawing.Size(195, 165);
+            this.panelSwitch.Size = new System.Drawing.Size(327, 165);
             this.panelSwitch.TabIndex = 20;
             this.panelSwitch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelSwitch_MouseClick);
             // 
@@ -250,10 +253,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(342, 283);
-            this.Controls.Add(this.btnFan);
-            this.Controls.Add(this.lbIP);
-            this.Controls.Add(this.picIP);
-            this.Controls.Add(this.btnMore);
+            this.Controls.Add(this.lblID);
+            this.Controls.Add(this.picID);
             this.Controls.Add(this.lbUnderscore);
             this.Controls.Add(this.picCO2);
             this.Controls.Add(this.lbCO2);
@@ -275,11 +276,12 @@
             this.Text = "Application";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ApplicationForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picIP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCO2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTVOC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTemp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHumid)).EndInit();
+            this.panelSwitch.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -300,8 +302,8 @@
         private System.Windows.Forms.PictureBox picCO2;
       private System.Windows.Forms.Label lbUnderscore;
       private System.Windows.Forms.Button btnMore;
-      private System.Windows.Forms.PictureBox picIP;
-      private System.Windows.Forms.Label lbIP;
+      private System.Windows.Forms.PictureBox picID;
+      private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.Timer autoSaver;
         private System.Windows.Forms.Button btnFan;
         private System.Windows.Forms.Panel panelSwitch;

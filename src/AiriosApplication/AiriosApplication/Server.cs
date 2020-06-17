@@ -13,11 +13,17 @@ namespace AiriosApplication
 {
     public class Server
     {
+
+        /// <summary>
+        /// With this command we run the server.
+        /// We create a "handler" for the streams and all the data parsing on a new thread,
+        /// every time there is a new request incoming.
+        /// </summary>
         public void Run()
         {
             Thread.CurrentThread.IsBackground = true;
-            const int PORT = 42069;
-            const string ADDRESS = "192.168.178.134"; //localhost IP, must be portforwarded with public IP later 
+            const int PORT = 42069;                     //The desired port for the server, this is the port that you would portforward if needed.
+            const string ADDRESS = "192.168.178.134";   //the IP of the computer this server is going to run on (must be used the IP that the router assigned to the PC
 
             IPAddress ipAddr = IPAddress.Parse(ADDRESS);
             IPEndPoint localEndPoint = new IPEndPoint(ipAddr, PORT);

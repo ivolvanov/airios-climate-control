@@ -4,7 +4,9 @@
 
 #define SSIDWiFi "Vasilevi"
 #define passwordWiFi "vnet1vnet1"
+#define SENSORNAME "Living Room"
 
+//IP and PORT of the server
 const String IP = "192.168.1.180";
 const String PORT = "42069";
 const String uriServer = "http://" + IP + ":" + PORT;
@@ -12,7 +14,7 @@ const String uriServer = "http://" + IP + ":" + PORT;
 SoftwareSerial ss(D7, D8);
 
 String POSTrequest(String dataSent);
-String GETrequest();
+//String GETrequest();      //This is a feature that we do not use in this project.
 
 void setup() {
   Serial.begin(9600);
@@ -26,7 +28,7 @@ void setup() {
     delay(50);
     if (WiFi.status() == WL_CONNECTED)
     {
-      Serial.print("ESP module connected at local IP: ");
+      Serial.print("ESP module connected at local IP: ");   //Connected to WiFi
       Serial.println(WiFi.localIP());
     }
   }
@@ -43,19 +45,21 @@ void loop() {
       counter++;
       delay(2);
     }
-    if(buffer.startsWith("#") && buffer.endsWith("$"))
-    for(int i = 0; i < buffer.length(); i++)
+    if(buffer.startsWith("#") && buffer.endsWith("$"))      //If we receive proper protocol from the Nucleo,
+    for(int i = 0; i < buffer.length(); i++)                //we send a requet to the server (every 5 min and spikes)
     {
       if(buffer[i] == 'i')
       {
         buffer = buffer.substring(0, i);
-        buffer += WiFi.localIP().toString();
+        //buffer += WiFi.localIP().toString();
+        buffer += SENSORNAME;
         buffer += "$";
         Serial.println(buffer);
         POSTrequest(buffer);
+        delay(10);
+        break;
       }
     }
-    //Serial.println(buffer);
   }
 }
 
@@ -97,7 +101,7 @@ String POSTrequest(String dataSent)
   }
 }
 
-String GETrequest()
+/*String GETrequest()
 {
   if (WiFi.status() == WL_CONNECTED)
   {
@@ -131,4 +135,4 @@ String GETrequest()
     Serial.println("WiFi not connected, please check connection!");
     return "NotWorking";
   }
-}
+}*/

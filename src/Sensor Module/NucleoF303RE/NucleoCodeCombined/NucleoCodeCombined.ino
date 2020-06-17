@@ -2,6 +2,7 @@
 
 SoftSerial serialco2(RXco2, TXco2, ssco2);
 SoftSerial serialESP(RXesp, TXesp, ssesp);
+
 unsigned long long checkSerialESP = 0, checkSensors = 0;
 int co2 = 0, voc = 0, oldco2 = 0, oldvoc = 0;
 float temperatureValue = 0, humidityValue = 0;
@@ -31,7 +32,7 @@ void setup()
 
 void loop()
 {
-  if (co2Spike || vocSpike)
+  if (co2Spike || vocSpike)       //Spike detection 
   {
     String protocol = "#";
     protocol += temperatureValue;
@@ -61,7 +62,6 @@ void loop()
   //---------------------------------------------------------------------
   if (millis() - checkSensors > cycleCheckSensors)  //Read sensors measurements every 2 seconds.
   {
-    //TO DO - MAKE IT DETECT SPIKES!
     co2 = GetCO2();
     GetTempHum(&temperatureValue, &humidityValue);
     voc = GetVOC();
@@ -129,7 +129,7 @@ void loop()
     protocol += voc;
     protocol += ";i";
     protocol += "$";
-    Serial.println(protocol); //      #26.00;1291;42.75;125;i$
+    Serial.println(protocol); //      #26.00;1291;42.75;125;i$ - example
     serialESP.print(protocol);
     checkSerialESP = millis();
   }

@@ -18,11 +18,14 @@ namespace AiriosApplication
             this.socket = socket;
         }
 
+        /// <summary>
+        /// With this method we accept the data sent and redirect it to the Readings class for parsing. 
+        /// </summary>
         public void Run()
         {
             try
             {
-                NetworkStream networkStream = new NetworkStream(socket);
+                NetworkStream networkStream = new NetworkStream(socket);        //we open the streams we need for reading/writing
                 StreamReader streamReader = new StreamReader(networkStream);
                 StreamWriter streamWriter = new StreamWriter(networkStream);
 
@@ -31,7 +34,7 @@ namespace AiriosApplication
                 // first line always contains the request.
                 string response;
 
-                string[] parts = line.Split(' ');
+                string[] parts = line.Split(' ');       //we get the type of request so that we know how to proceed 
                 if (parts[0].ToUpper() == "GET")
                     response = "GET handled";
 
@@ -45,27 +48,27 @@ namespace AiriosApplication
                     {
                         lline = streamReader.ReadLine();
                         lline = lline.ToUpper();
-                        if (lline.ToUpper().StartsWith("CONTENT-LENGTH:"))
+                        if (lline.ToUpper().StartsWith("CONTENT-LENGTH:"))      //we extract the content length in bytes
                             length = Int16.Parse(lline.Substring(16));
                     }
                     while (lline != "")
                     {
-                        lline = streamReader.ReadLine();
+                        lline = streamReader.ReadLine();                    //we read until the end of the header
                     }
 
                     buffer = new char[length];
-                    streamReader.Read(buffer, 0, length);
+                    streamReader.Read(buffer, 0, length);               //and we read the body with the content length we earlier took
                     //Console.WriteLine(buffer);   //debugging                    
                     Readings.GetValuesFromBuffer(buffer);
                     response = "POST handled";
                 }
                 else
                 {
-                    streamWriter.WriteLine("HTTP/1.1 405 Method Not Allowed\r\n");
+                    streamWriter.WriteLine("HTTP/1.1 405 Method Not Allowed\r\n");      //if the request is different than POST or GET
                     goto skipResponse;
                 }
 
-                streamWriter.Write("HTTP/1.1 200 OK\r\n");
+                streamWriter.Write("HTTP/1.1 200 OK\r\n");          //sending response
                 streamWriter.Write("Server: C# server\r\n");
                 streamWriter.Write("Content-Type: text/plain\r\n");
                 streamWriter.Write("Connection: Closed\r\n");

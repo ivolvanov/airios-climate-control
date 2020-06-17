@@ -41,14 +41,15 @@ namespace AiriosApplication
                     Convert.ToInt32(splitBuffer[1]), Convert.ToInt32(splitBuffer[3]), splitBuffer[4]);
                 }
             }
+            // The message has to be protocol-compliant !
+            // Update: it is needed for extra security: This way we prevent from "Hackers" send data we dont want.
             catch (Exception)
             { }
+
             // This monstrosity is necessary because of unsafe threading
             // but hey, we have threads so it's a win in my book ¯\_(ツ)_/¯
             // Update: this monstrosity is no longer necessary because the unsafe threading has been fixed (graphing still causes some problems tho)
             // I'm leaving it as a comment to remind us of our progress ♿
-            // Update: it is needed for extra security: This way we prevent from "Hackers" send data we dont want.
-            // The message has to be protocol-compliant !
         }
 
         /// <summary>

@@ -47,7 +47,7 @@ namespace AiriosApplication
         }
 
         private void updateTimer_Tick(object sender, EventArgs e)
-        {            
+        {
             updateTimer.Stop();
             lock (Readings.readingsLock)
             {
@@ -88,7 +88,7 @@ namespace AiriosApplication
             // we make a copy of the default view for dynamic scaling - otherwise if one day has high 
             // values all of them will have a maximal Y axis value that is way too high and the graph looks ugly
             DataTable dynamicScalingTable;
-                dynamicScalingTable = Readings.Data.DefaultView.ToTable();
+            dynamicScalingTable = Readings.Data.DefaultView.ToTable();
             if (dynamicScalingTable.Rows.Count != 0)    // if a day with no readings is selected
             {
                 chartStats.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(dynamicScalingTable.Compute("MIN(" + column + ")", null)) - 5;
@@ -105,6 +105,30 @@ namespace AiriosApplication
         private void cbAllTime_CheckedChanged(object sender, EventArgs e)
         {
             dtpDate.Enabled = !dtpDate.Enabled;
+        }
+
+        private void rbTemperature_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbTemperature.Checked)
+                Graph("Temperature");
+        }
+
+        private void rbHumidity_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbHumidity.Checked)
+                Graph("Humidity");
+        }
+
+        private void rbCO2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbCO2.Checked)
+                Graph("CO2");
+        }
+
+        private void rbVOC_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbVOC.Checked)
+                Graph("VOC");
         }
     }
 }

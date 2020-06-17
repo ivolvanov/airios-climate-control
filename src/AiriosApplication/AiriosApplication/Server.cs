@@ -23,7 +23,7 @@ namespace AiriosApplication
         {
             Thread.CurrentThread.IsBackground = true;
             const int PORT = 42069;                     //The desired port for the server, this is the port that you would portforward if needed.
-            const string ADDRESS = "192.168.178.134";   //the IP of the computer this server is going to run on (must be used the IP that the router assigned to the PC
+            const string ADDRESS = "192.168.1.180";   //the IP of the computer this server is going to run on (must be used the IP that the router assigned to the PC
 
             IPAddress ipAddr = IPAddress.Parse(ADDRESS);
             IPEndPoint localEndPoint = new IPEndPoint(ipAddr, PORT);

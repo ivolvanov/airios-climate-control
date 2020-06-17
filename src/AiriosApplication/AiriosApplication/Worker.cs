@@ -22,7 +22,7 @@ namespace AiriosApplication
         /// With this method we accept the data sent and redirect it to the Readings class for parsing. 
         /// </summary>
         public void Run()
-        {
+        { 
             try
             {
                 NetworkStream networkStream = new NetworkStream(socket);        //we open the streams we need for reading/writing
@@ -32,7 +32,8 @@ namespace AiriosApplication
                 string line = streamReader.ReadLine();
 
                 // first line always contains the request.
-                string response;
+                string response = "Method not Allowed";
+                bool skipResponse = false;
 
                 string[] parts = line.Split(' ');       //we get the type of request so that we know how to proceed 
                 if (parts[0].ToUpper() == "GET")
@@ -58,25 +59,28 @@ namespace AiriosApplication
 
                     buffer = new char[length];
                     streamReader.Read(buffer, 0, length);               //and we read the body with the content length we earlier took
-                    //Console.WriteLine(buffer);   //debugging                    
+                    Console.WriteLine(buffer);   //debugging                    
                     Readings.GetValuesFromBuffer(buffer);
                     response = "POST handled";
                 }
                 else
                 {
                     streamWriter.WriteLine("HTTP/1.1 405 Method Not Allowed\r\n");      //if the request is different than POST or GET
-                    goto skipResponse;
+                    skipResponse = true;
                 }
 
-                streamWriter.Write("HTTP/1.1 200 OK\r\n");          //sending response
-                streamWriter.Write("Server: C# server\r\n");
-                streamWriter.Write("Content-Type: text/plain\r\n");
-                streamWriter.Write("Connection: Closed\r\n");
-                streamWriter.Write("Content-Length: " + response.Length + "\r\n");
-                streamWriter.Write("\r\n");
-                streamWriter.Write(response);
+                if (!skipResponse)
+                {
+                    streamWriter.Write("HTTP/1.1 200 OK\r\n");          //sending response
+                    streamWriter.Write("Server: C# server\r\n");
+                    streamWriter.Write("Content-Type: text/plain\r\n");
+                    streamWriter.Write("Connection: Closed\r\n");
+                    streamWriter.Write("Content-Length: " + response.Length + "\r\n");
+                    streamWriter.Write("\r\n");
+                    streamWriter.Write(response);
+                    skipResponse = false;
+                }
 
-            skipResponse:  //flag for goto on line 60
                 streamWriter.Flush();
                 socket.Close();
             }

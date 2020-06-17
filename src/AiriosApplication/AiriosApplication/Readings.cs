@@ -23,28 +23,32 @@ namespace AiriosApplication
         /// <param name="buffer"></param>
         public static void GetValuesFromBuffer(char[] buffer)
         {
-            string bufferString = new string(buffer);
-            string[] splitBuffer = bufferString.Split(';');
-
-            splitBuffer[0] = splitBuffer[0].Replace("#%", "");
-            splitBuffer[0] = splitBuffer[0].Replace("#", "");
-            splitBuffer[1] = splitBuffer[1].Replace("%", "");
-            splitBuffer[3] = splitBuffer[3].Replace("%", "");
-            splitBuffer[0] = splitBuffer[0].Replace(".", ","); //doubles need to be with a comma instead of a .
-            splitBuffer[2] = splitBuffer[2].Replace(".", ",");
-            splitBuffer[4] = splitBuffer[4].Replace("$", "");
-            lock (readingsLock)
+            try
             {
-                Data.Rows.Add(DateTime.Now, Convert.ToDouble(splitBuffer[0]), Convert.ToDouble(splitBuffer[2]),
-                Convert.ToInt32(splitBuffer[1]), Convert.ToInt32(splitBuffer[3]), splitBuffer[4]);
-            }
+                string bufferString = new string(buffer);
+                string[] splitBuffer = bufferString.Split(';');
 
-            // catch (Exception)
-            // { }
+                splitBuffer[0] = splitBuffer[0].Replace("#%", "");
+                splitBuffer[0] = splitBuffer[0].Replace("#", "");
+                splitBuffer[1] = splitBuffer[1].Replace("%", "");
+                splitBuffer[3] = splitBuffer[3].Replace("%", "");
+                splitBuffer[0] = splitBuffer[0].Replace(".", ","); //doubles need to be with a comma instead of a .
+                splitBuffer[2] = splitBuffer[2].Replace(".", ",");
+                splitBuffer[4] = splitBuffer[4].Replace("$", "");
+                lock (readingsLock)
+                {
+                    Data.Rows.Add(DateTime.Now, Convert.ToDouble(splitBuffer[0]), Convert.ToDouble(splitBuffer[2]),
+                    Convert.ToInt32(splitBuffer[1]), Convert.ToInt32(splitBuffer[3]), splitBuffer[4]);
+                }
+            }
+            catch (Exception)
+            { }
             // This monstrosity is necessary because of unsafe threading
             // but hey, we have threads so it's a win in my book ¯\_(ツ)_/¯
             // Update: this monstrosity is no longer necessary because the unsafe threading has been fixed (graphing still causes some problems tho)
             // I'm leaving it as a comment to remind us of our progress ♿
+            // Update: it is needed for extra security: This way we prevent from "Hackers" send data we dont want.
+            // The message has to be protocol-compliant !
         }
 
         /// <summary>

@@ -136,6 +136,8 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvData.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvData.RowHeadersVisible = false;
+            this.dgvData.RowHeadersWidth = 51;
             this.dgvData.Size = new System.Drawing.Size(916, 163);
             this.dgvData.TabIndex = 0;
             // 
@@ -146,7 +148,7 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
             this.label1.Location = new System.Drawing.Point(984, 415);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 25);
+            this.label1.Size = new System.Drawing.Size(91, 32);
             this.label1.TabIndex = 1;
             this.label1.Text = "Graph:";
             // 
@@ -159,11 +161,12 @@
             this.rbTemperature.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
             this.rbTemperature.Location = new System.Drawing.Point(967, 443);
             this.rbTemperature.Name = "rbTemperature";
-            this.rbTemperature.Size = new System.Drawing.Size(136, 29);
+            this.rbTemperature.Size = new System.Drawing.Size(171, 36);
             this.rbTemperature.TabIndex = 3;
             this.rbTemperature.TabStop = true;
             this.rbTemperature.Text = "Temperature";
             this.rbTemperature.UseVisualStyleBackColor = false;
+            this.rbTemperature.CheckedChanged += new System.EventHandler(this.rbTemperature_CheckedChanged);
             // 
             // rbHumidity
             // 
@@ -172,10 +175,11 @@
             this.rbHumidity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
             this.rbHumidity.Location = new System.Drawing.Point(967, 478);
             this.rbHumidity.Name = "rbHumidity";
-            this.rbHumidity.Size = new System.Drawing.Size(106, 29);
+            this.rbHumidity.Size = new System.Drawing.Size(134, 36);
             this.rbHumidity.TabIndex = 4;
             this.rbHumidity.Text = "Humidity";
             this.rbHumidity.UseVisualStyleBackColor = true;
+            this.rbHumidity.CheckedChanged += new System.EventHandler(this.rbHumidity_CheckedChanged);
             // 
             // rbVOC
             // 
@@ -184,10 +188,11 @@
             this.rbVOC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
             this.rbVOC.Location = new System.Drawing.Point(967, 548);
             this.rbVOC.Name = "rbVOC";
-            this.rbVOC.Size = new System.Drawing.Size(68, 29);
+            this.rbVOC.Size = new System.Drawing.Size(83, 36);
             this.rbVOC.TabIndex = 6;
             this.rbVOC.Text = "VOC";
             this.rbVOC.UseVisualStyleBackColor = true;
+            this.rbVOC.CheckedChanged += new System.EventHandler(this.rbVOC_CheckedChanged);
             // 
             // rbCO2
             // 
@@ -196,10 +201,11 @@
             this.rbCO2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
             this.rbCO2.Location = new System.Drawing.Point(967, 513);
             this.rbCO2.Name = "rbCO2";
-            this.rbCO2.Size = new System.Drawing.Size(65, 29);
+            this.rbCO2.Size = new System.Drawing.Size(81, 36);
             this.rbCO2.TabIndex = 5;
             this.rbCO2.Text = "CO2";
             this.rbCO2.UseVisualStyleBackColor = true;
+            this.rbCO2.CheckedChanged += new System.EventHandler(this.rbCO2_CheckedChanged);
             // 
             // updateTimer
             // 
@@ -211,7 +217,7 @@
             this.dtpDate.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDate.Location = new System.Drawing.Point(1146, 443);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(297, 33);
+            this.dtpDate.Size = new System.Drawing.Size(297, 39);
             this.dtpDate.TabIndex = 7;
             // 
             // label2
@@ -221,7 +227,7 @@
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
             this.label2.Location = new System.Drawing.Point(1195, 415);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(195, 25);
+            this.label2.Size = new System.Drawing.Size(251, 32);
             this.label2.TabIndex = 8;
             this.label2.Text = "Select date to graph:";
             // 
@@ -232,7 +238,7 @@
             this.cbAllTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
             this.cbAllTime.Location = new System.Drawing.Point(1200, 482);
             this.cbAllTime.Name = "cbAllTime";
-            this.cbAllTime.Size = new System.Drawing.Size(180, 29);
+            this.cbAllTime.Size = new System.Drawing.Size(224, 36);
             this.cbAllTime.TabIndex = 9;
             this.cbAllTime.Text = "Show all readings";
             this.cbAllTime.UseVisualStyleBackColor = true;
@@ -246,7 +252,7 @@
             this.cmbDevice.FormattingEnabled = true;
             this.cmbDevice.Location = new System.Drawing.Point(1107, 556);
             this.cmbDevice.Name = "cmbDevice";
-            this.cmbDevice.Size = new System.Drawing.Size(352, 33);
+            this.cmbDevice.Size = new System.Drawing.Size(352, 40);
             this.cmbDevice.TabIndex = 10;
             // 
             // label3
@@ -256,13 +262,13 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
             this.label3.Location = new System.Drawing.Point(1102, 528);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(362, 25);
+            this.label3.Size = new System.Drawing.Size(468, 32);
             this.label3.TabIndex = 11;
             this.label3.Text = "Select which device\'s readings to graph:";
             // 
             // StatisticsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(107)))));
             this.ClientSize = new System.Drawing.Size(1477, 607);

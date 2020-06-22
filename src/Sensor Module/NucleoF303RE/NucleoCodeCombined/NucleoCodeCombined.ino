@@ -14,15 +14,21 @@ void setup()
   Serial.begin(9600);
   serialco2.begin(9600);
   serialESP.begin(9600);
+  
   pinMode(D10, OUTPUT);
+  
   Wire.begin();
   SHT30setup();
+  
   checkSerialESP = millis();
   checkSensors = millis();
+  
   delay(5000);
+  
   co2 = GetCO2();
   GetTempHum(&temperatureValue, &humidityValue);
   voc = GetVOC();
+  
   delay(100);
   serialESP.print("BEGIN");
   delay(200);
@@ -115,9 +121,9 @@ void loop()
        start character - #
        separating character - ;
        commands - % for spiked value
-       template - 1st: temp 2nd: co2 3rd: humidity 4th IP of ESP, will be added later
+       template - 1st: temp 2nd: co2 3rd: humidity 4th name of ESP, will be added later
        end character - $
-       example - #temp_value;%co2_value;hum_value;%voc_value;Ip_value$
+       example - #temp_value;%co2_value;hum_value;%voc_value;sensor_name$
     */
     String protocol = "#";
     protocol += temperatureValue;

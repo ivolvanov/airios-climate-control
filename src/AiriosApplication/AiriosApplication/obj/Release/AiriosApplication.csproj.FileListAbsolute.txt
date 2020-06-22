@@ -9,3 +9,15 @@ C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\Block 1
 C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\Block 1\Project\Week 11\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.csproj.CoreCompileInputs.cache
 C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\Block 1\Project\Week 11\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.exe
 C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\Block 1\Project\Week 11\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.pdb
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\bin\Release\AiriosApplication.exe.config
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\bin\Release\AiriosApplication.exe
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\bin\Release\AiriosApplication.pdb
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.csprojAssemblyReference.cache
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.ApplicationForm.resources
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.StatisticsForm.resources
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.Properties.Resources.resources
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.VentilationForm.resources
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.csproj.GenerateResource.cache
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.csproj.CoreCompileInputs.cache
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.exe
+C:\Users\ivoiv\OneDrive - Office 365 Fontys\Bureaublad\Fontys\Semester 2\airiosproject\src\AiriosApplication\AiriosApplication\obj\Release\AiriosApplication.pdb

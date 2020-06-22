@@ -2,8 +2,8 @@
 #include <ESP8266HTTPClient.h>
 #include <SoftwareSerial.h>
 
-#define SSIDWiFi "Vasilevi"
-#define passwordWiFi "vnet1vnet1"
+#define SSIDWIFI "Vasilevi"
+#define PASSWORDWIFI "vnet1vnet1"
 #define SENSORNAME "Living Room"
 
 //IP and PORT of the server
@@ -21,7 +21,7 @@ void setup() {
   ss.begin(9600);
   pinMode(D5, OUTPUT);
   Serial.println("Setup initiated.");
-  WiFi.begin(SSIDWiFi, passwordWiFi);
+  WiFi.begin(SSIDWIFI, PASSWORDWIFI);
   while (WiFi.status() != WL_CONNECTED)
   {
     Serial.println(".");
